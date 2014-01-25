@@ -17,6 +17,7 @@ package
         public var m_mouseJoint:b2MouseJoint;
         public var dollLGrabber:DollGrabber;
         public var dollRGrabber:DollGrabber;
+        public var dollController:DollController;
         public var dollCollision:DollContactListener;
         static public var mouseXWorldPhys:Number;
         static public var mouseYWorldPhys:Number;
@@ -60,7 +61,9 @@ package
             doll = new PhysicsDoll();
             doll.create(m_world, position, PhysicsDoll.BTYPE);
             dollRGrabber = new DollGrabber();
-            dollRGrabber.create(doll, m_world, worldAABB, DollGrabber.ARROW);
+            dollRGrabber.create(doll, m_world, worldAABB);
+
+            dollController = new DollController(dollRGrabber, dollLGrabber);
         }
 
         override public function update():void
@@ -73,6 +76,7 @@ package
             m_world.Step(1.0/30.0, 10, 10);
             m_world.DrawDebugData();
 
+            dollController.update();
             dollLGrabber.update();
             dollRGrabber.update();
         }
