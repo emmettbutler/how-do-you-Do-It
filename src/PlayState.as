@@ -40,18 +40,22 @@ package
             var startY:Number = 20 + Math.random() * 50;
             var startX:Number = 110;
 
+            var worldAABB:b2AABB = new b2AABB();
+            worldAABB.lowerBound.Set(0, 0);
+            worldAABB.upperBound.Set(640 / m_physScale, 480 / m_physScale);
+
             var position:FlxPoint = new FlxPoint(startX, startY);
             var doll:PhysicsDoll = new PhysicsDoll();
             doll.create(m_world, position, PhysicsDoll.ATYPE);
             dollLGrabber = new DollGrabber();
-            dollLGrabber.create(doll, m_world);
+            dollLGrabber.create(doll, m_world, worldAABB);
 
             startX += 480;
             position = new FlxPoint(startX, startY);
             doll = new PhysicsDoll();
             doll.create(m_world, position, PhysicsDoll.BTYPE);
             dollRGrabber = new DollGrabber();
-            dollRGrabber.create(doll, m_world, DollGrabber.ARROW);
+            dollRGrabber.create(doll, m_world, worldAABB, DollGrabber.ARROW);
         }
 
         override public function update():void
@@ -165,12 +169,12 @@ package
             var wallB:b2Body;
 
             // Left
-            wallBd.position.Set( -95 / m_physScale, 360 / m_physScale / 2);
-            wall.SetAsBox(100/m_physScale, 400/m_physScale/2);
+            wallBd.position.Set( -95 / m_physScale, 480 / m_physScale / 2);
+            wall.SetAsBox(100/m_physScale, 480/m_physScale/2);
             wallB = m_world.CreateBody(wallBd);
             wallB.CreateFixture2(wall);
             // Right
-            wallBd.position.Set((640 + 95) / m_physScale, 360 / m_physScale / 2);
+            wallBd.position.Set((640 + 95) / m_physScale, 480 / m_physScale / 2);
             wallB = m_world.CreateBody(wallBd);
             wallB.CreateFixture2(wall);
             // Top
@@ -179,7 +183,7 @@ package
             wallB = m_world.CreateBody(wallBd);
             wallB.CreateFixture2(wall);
             // Bottom
-            wallBd.position.Set(640 / m_physScale / 2, (360 + 95) / m_physScale);
+            wallBd.position.Set(640 / m_physScale / 2, (480 + 95) / m_physScale);
             wallB = m_world.CreateBody(wallBd);
             wallB.CreateFixture2(wall);
         }

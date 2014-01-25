@@ -13,6 +13,7 @@ package
         public var m_mouseJoint:b2MouseJoint;
         public var ctrlScheme:Number;
         public var doll:PhysicsDoll;
+        public var worldBounds:b2AABB;
 
         static public var dollTranslateSpeed:Number = .1;
         static public var dollRotateSpeed:Number = .1;
@@ -20,10 +21,13 @@ package
         public static const WASD:Number = 0;
         public static const ARROW:Number = 1;
 
-        public function create(doll:PhysicsDoll, m_world:b2World, ctrl:Number = WASD):void
+        public function create(doll:PhysicsDoll, m_world:b2World,
+                               bounds:b2AABB,
+                               ctrl:Number = WASD):void
         {
             this.ctrlScheme = ctrl;
             this.doll = doll;
+            this.worldBounds = bounds;
 
             var md:b2MouseJointDef = new b2MouseJointDef();
             md.bodyA = m_world.GetGroundBody();
@@ -36,7 +40,7 @@ package
 
         public function update():void
         {
-            var target:b2Vec2 = m_mouseJoint.GetTarget();
+            var target:b2Vec2 = m_mouseJoint.GetTarget().Copy();
             var angle:Number = doll.midriff.GetAngle();
             var left:Boolean = false;
             var right:Boolean = false;
@@ -98,7 +102,12 @@ package
             if (down) {
                 target.y += dollTranslateSpeed;
             }
-            m_mouseJoint.SetTarget(target);
+            var targetAABB:b2AABB = new b2AABB();
+            targetAABB.lowerBound.Set(target.x, target.y);
+            targetAABB.upperBound.Set(target.x, target.y);
+            if (worldBounds.Contains(targetAABB)) {
+                m_mouseJoint.SetTarget(target);
+            }
             doll.midriff.SetAngle(angle);
         }
     }
