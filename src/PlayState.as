@@ -62,7 +62,7 @@ package
             wallB.CreateFixture2(wall);
 
             for (var i:int = 0; i < 2; i++){
-                var startX:Number = 70 + Math.random() * 20 + 480 * i;
+                var startX:Number = 170 + 480 * i;
                 var startY:Number = 20 + Math.random() * 50;
 
                 var doll:PhysicsDoll = new PhysicsDoll();
@@ -71,9 +71,9 @@ package
                 var md:b2MouseJointDef = new b2MouseJointDef();
                 md.bodyA = m_world.GetGroundBody();
                 md.bodyB = doll.midriff;
-                md.target.Set(5, 5);
+                md.target.Set(doll.midriff.GetPosition().x, doll.midriff.GetPosition().y);
                 md.collideConnected = true;
-                md.maxForce = 300.0 * doll.midriff.GetMass();
+                md.maxForce = 3000.0 * doll.midriff.GetMass();
                 m_mouseJoint = m_world.CreateJoint(md) as b2MouseJoint;
             }
         }

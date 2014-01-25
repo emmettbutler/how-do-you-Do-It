@@ -39,9 +39,6 @@ package
             bd.position.Set(startX / m_physScale, startY / m_physScale);
             var head:b2Body = m_world.CreateBody(bd);
             head.CreateFixture(fixtureDef);
-            //if (i == 0){
-                head.ApplyImpulse(new b2Vec2(Math.random() * 100 - 50, Math.random() * 100 - 50), head.GetWorldCenter());
-            //}
 
             // Torso1
             box = new b2PolygonShape();
