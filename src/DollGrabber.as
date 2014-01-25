@@ -15,6 +15,7 @@ package
         public var doll:PhysicsDoll;
 
         static public var dollTranslateSpeed:Number = .1;
+        static public var dollRotateSpeed:Number = .1;
 
         public static const WASD:Number = 0;
         public static const ARROW:Number = 1;
@@ -37,40 +38,65 @@ package
         {
             var target:b2Vec2 = m_mouseJoint.GetTarget();
             var angle:Number = doll.midriff.GetAngle();
+            var left:Boolean = false;
+            var right:Boolean = false;
+            var up:Boolean = false;
+            var down:Boolean = false;
             if (ctrlScheme == WASD) {
                 if (FlxG.keys.D) {
-                    target.x += dollTranslateSpeed;
+                    right = true;
+                    left = false;
                 } else if (FlxG.keys.A) {
-                    target.x -= dollTranslateSpeed;
+                    right = false;
+                    left = true;
                 }
                 if (FlxG.keys.S) {
-                    target.y += dollTranslateSpeed;
+                    up = false;
+                    down = true;
                 } else if (FlxG.keys.W) {
-                    target.y -= dollTranslateSpeed;
+                    up = true;
+                    down = false;
                 }
 
                 if (FlxG.keys.E) {
-                    angle += .1;
+                    angle += dollRotateSpeed;
                 } else if (FlxG.keys.Q) {
-                    angle -= .1;
+                    angle -= dollRotateSpeed;
                 }
             } else if (ctrlScheme == ARROW) {
                 if (FlxG.keys.L) {
-                    target.x += dollTranslateSpeed;
+                    right = true;
+                    left = false;
                 } else if (FlxG.keys.J) {
-                    target.x -= dollTranslateSpeed;
+                    right = false;
+                    left = true;
                 }
                 if (FlxG.keys.K) {
-                    target.y += dollTranslateSpeed;
+                    up = false;
+                    down = true;
                 } else if (FlxG.keys.I) {
-                    target.y -= dollTranslateSpeed;
+                    up = true;
+                    down = false;
                 }
 
                 if (FlxG.keys.U) {
-                    angle += .1;
+                    angle += dollRotateSpeed;
                 } else if (FlxG.keys.O) {
-                    angle -= .1;
+                    angle -= dollRotateSpeed;
                 }
+            }
+
+            if (left) {
+                target.x -= dollTranslateSpeed;
+            }
+            if (right) {
+                target.x += dollTranslateSpeed;
+            }
+            if (up) {
+                target.y -= dollTranslateSpeed;
+            }
+            if (down) {
+                target.y += dollTranslateSpeed;
             }
             m_mouseJoint.SetTarget(target);
             doll.midriff.SetAngle(angle);
