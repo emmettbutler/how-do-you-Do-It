@@ -55,8 +55,10 @@ package
             box.SetAsBox(15 / m_physScale, 10 / m_physScale);
             fixtureDef.shape = box;
             bd.position.Set(startX / m_physScale, (startY + 43) / m_physScale);
+            bd.fixedRotation = true;
             var torso2:b2Body = m_world.CreateBody(bd);
             torso2.CreateFixture(fixtureDef);
+            bd.fixedRotation = false;
             midriff = torso2;
             // Torso3
             box.SetAsBox(15 / m_physScale, 10 / m_physScale);

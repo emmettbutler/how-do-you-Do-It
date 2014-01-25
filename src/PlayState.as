@@ -38,15 +38,15 @@ package
             add(thinking);
 
             var startY:Number = 20 + Math.random() * 50;
-
             var startX:Number = 110;
+
             var position:FlxPoint = new FlxPoint(startX, startY);
             var doll:PhysicsDoll = new PhysicsDoll();
             doll.create(m_world, position);
             dollLGrabber = new DollGrabber();
             dollLGrabber.create(doll, m_world);
 
-            startX = 110 + 480;
+            startX += 480;
             position = new FlxPoint(startX, startY);
             doll = new PhysicsDoll();
             doll.create(m_world, position);

@@ -12,6 +12,7 @@ package
     {
         public var m_mouseJoint:b2MouseJoint;
         public var ctrlScheme:Number;
+        public var doll:PhysicsDoll;
 
         static public var dollTranslateSpeed:Number = .1;
 
@@ -21,6 +22,7 @@ package
         public function create(doll:PhysicsDoll, m_world:b2World, ctrl:Number = WASD):void
         {
             this.ctrlScheme = ctrl;
+            this.doll = doll;
 
             var md:b2MouseJointDef = new b2MouseJointDef();
             md.bodyA = m_world.GetGroundBody();
@@ -34,6 +36,7 @@ package
         public function update():void
         {
             var target:b2Vec2 = m_mouseJoint.GetTarget();
+            var angle:Number = doll.midriff.GetAngle();
             if (ctrlScheme == WASD) {
                 if (FlxG.keys.D) {
                     target.x += dollTranslateSpeed;
@@ -45,19 +48,32 @@ package
                 } else if (FlxG.keys.W) {
                     target.y -= dollTranslateSpeed;
                 }
+
+                if (FlxG.keys.E) {
+                    angle += .1;
+                } else if (FlxG.keys.Q) {
+                    angle -= .1;
+                }
             } else if (ctrlScheme == ARROW) {
-                if (FlxG.keys.RIGHT) {
+                if (FlxG.keys.L) {
                     target.x += dollTranslateSpeed;
-                } else if (FlxG.keys.LEFT) {
+                } else if (FlxG.keys.J) {
                     target.x -= dollTranslateSpeed;
                 }
-                if (FlxG.keys.DOWN) {
+                if (FlxG.keys.K) {
                     target.y += dollTranslateSpeed;
-                } else if (FlxG.keys.UP) {
+                } else if (FlxG.keys.I) {
                     target.y -= dollTranslateSpeed;
+                }
+
+                if (FlxG.keys.U) {
+                    angle += .1;
+                } else if (FlxG.keys.O) {
+                    angle -= .1;
                 }
             }
             m_mouseJoint.SetTarget(target);
+            doll.midriff.SetAngle(angle);
         }
     }
 }
