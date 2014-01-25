@@ -10,18 +10,18 @@ package
 
     import flash.display.*;
 
-    public class PlayState extends FlxState
+    public class PlayState extends TimedState
     {
         public var m_physScale:Number = 30
         public var m_world:b2World;
         public var m_mouseJoint:b2MouseJoint;
+        public var dollLMouseJoint:b2MouseJoint;
+        public var dollRMouseJoint:b2MouseJoint;
         static public var mouseXWorldPhys:Number;
         static public var mouseYWorldPhys:Number;
         static public var mouseXWorld:Number;
         static public var mouseYWorld:Number;
-        public var timeFrame:Number = 0;
-        public var timeSec:Number = 0;
-        public var endTime:Number = 5;
+
         public var thinking:ScrollingText;
 
         public var debugText:FlxText;
@@ -37,49 +37,21 @@ package
             thinking = new ScrollingText();
             add(thinking);
 
-            // Create border of boxes
-            var wall:b2PolygonShape= new b2PolygonShape();
-            var wallBd:b2BodyDef = new b2BodyDef();
-            var wallB:b2Body;
-
-            // Left
-            wallBd.position.Set( -95 / m_physScale, 360 / m_physScale / 2);
-            wall.SetAsBox(100/m_physScale, 400/m_physScale/2);
-            wallB = m_world.CreateBody(wallBd);
-            wallB.CreateFixture2(wall);
-            // Right
-            wallBd.position.Set((640 + 95) / m_physScale, 360 / m_physScale / 2);
-            wallB = m_world.CreateBody(wallBd);
-            wallB.CreateFixture2(wall);
-            // Top
-            wallBd.position.Set(640 / m_physScale / 2, -95 / m_physScale);
-            wall.SetAsBox(680/m_physScale/2, 100/m_physScale);
-            wallB = m_world.CreateBody(wallBd);
-            wallB.CreateFixture2(wall);
-            // Bottom
-            wallBd.position.Set(640 / m_physScale / 2, (360 + 95) / m_physScale);
-            wallB = m_world.CreateBody(wallBd);
-            wallB.CreateFixture2(wall);
-
             for (var i:int = 0; i < 2; i++){
-                var startX:Number = 170 + 480 * i;
+                var startX:Number = 110 + 480 * i;
                 var startY:Number = 20 + Math.random() * 50;
-
-                var doll:PhysicsDoll = new PhysicsDoll();
-                doll.create(m_world, new FlxPoint(startX, startY));
-
-                var md:b2MouseJointDef = new b2MouseJointDef();
-                md.bodyA = m_world.GetGroundBody();
-                md.bodyB = doll.midriff;
-                md.target.Set(doll.midriff.GetPosition().x, doll.midriff.GetPosition().y);
-                md.collideConnected = true;
-                md.maxForce = 3000.0 * doll.midriff.GetMass();
-                m_mouseJoint = m_world.CreateJoint(md) as b2MouseJoint;
+                var joint:b2MouseJoint = dollLMouseJoint;
+                if (i == 1) {
+                    joint = dollRMouseJoint;
+                }
+                setupDoll(new FlxPoint(startX, startY), joint);
             }
         }
 
         override public function update():void
         {
+            super.update();
+
             UpdateMouseWorld()
             MouseDrag();
 
@@ -88,23 +60,30 @@ package
             m_world.Step(1.0/30.0, 10, 10);
             m_world.DrawDebugData();
 
-            super.update();
-            timeFrame++;
+        }
 
-            if(timeFrame%100 == 0){
-                timeSec++;
-            }
+        override public function endCallback():void
+        {
+            FlxG.switchState(new SceneState("End", new MenuState()));
+        }
 
-            if(timeSec == endTime) {
-                //end
-                //FlxG.switchState(new SceneState("End", new MenuState()));
-            }
+        public function setupDoll(position:FlxPoint, mJoint:b2MouseJoint):void
+        {
+            var doll:PhysicsDoll = new PhysicsDoll();
+            doll.create(m_world, position);
+
+            var md:b2MouseJointDef = new b2MouseJointDef();
+            md.bodyA = m_world.GetGroundBody();
+            md.bodyB = doll.midriff;
+            md.target.Set(doll.midriff.GetPosition().x, doll.midriff.GetPosition().y);
+            md.collideConnected = true;
+            md.maxForce = 3000.0 * doll.midriff.GetMass();
+            mJoint = m_world.CreateJoint(md) as b2MouseJoint;
         }
 
         public function UpdateMouseWorld():void{
             mouseXWorldPhys = (FlxG.mouse.screenX)/m_physScale;
             mouseYWorldPhys = (FlxG.mouse.screenY)/m_physScale;
-
             mouseXWorld = (FlxG.mouse.screenX);
             mouseYWorld = (FlxG.mouse.screenY);
         }
@@ -128,7 +107,6 @@ package
                 }
             }
 
-
             // mouse release
             if (!FlxG.mouse.pressed()){
                 if (m_mouseJoint)
@@ -137,7 +115,6 @@ package
                     m_mouseJoint = null;
                 }
             }
-
 
             // mouse move
             if (m_mouseJoint)
@@ -189,6 +166,30 @@ package
             dbgDraw.SetLineThickness(1.0);
             dbgDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
             m_world.SetDebugDraw(dbgDraw);
+
+            // Create border of boxes
+            var wall:b2PolygonShape= new b2PolygonShape();
+            var wallBd:b2BodyDef = new b2BodyDef();
+            var wallB:b2Body;
+
+            // Left
+            wallBd.position.Set( -95 / m_physScale, 360 / m_physScale / 2);
+            wall.SetAsBox(100/m_physScale, 400/m_physScale/2);
+            wallB = m_world.CreateBody(wallBd);
+            wallB.CreateFixture2(wall);
+            // Right
+            wallBd.position.Set((640 + 95) / m_physScale, 360 / m_physScale / 2);
+            wallB = m_world.CreateBody(wallBd);
+            wallB.CreateFixture2(wall);
+            // Top
+            wallBd.position.Set(640 / m_physScale / 2, -95 / m_physScale);
+            wall.SetAsBox(680/m_physScale/2, 100/m_physScale);
+            wallB = m_world.CreateBody(wallBd);
+            wallB.CreateFixture2(wall);
+            // Bottom
+            wallBd.position.Set(640 / m_physScale / 2, (360 + 95) / m_physScale);
+            wallB = m_world.CreateBody(wallBd);
+            wallB.CreateFixture2(wall);
         }
     }
 }
