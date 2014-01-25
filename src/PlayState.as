@@ -15,8 +15,8 @@ package
         public var m_physScale:Number = 30
         public var m_world:b2World;
         public var m_mouseJoint:b2MouseJoint;
-        public var dollLMouseJoint:b2MouseJoint;
-        public var dollRMouseJoint:b2MouseJoint;
+        public var dollLGrabber:DollGrabber;
+        public var dollRGrabber:DollGrabber;
         static public var mouseXWorldPhys:Number;
         static public var mouseYWorldPhys:Number;
         static public var mouseXWorld:Number;
@@ -37,15 +37,21 @@ package
             thinking = new ScrollingText();
             add(thinking);
 
-            for (var i:int = 0; i < 2; i++){
-                var startX:Number = 110 + 480 * i;
-                var startY:Number = 20 + Math.random() * 50;
-                var joint:b2MouseJoint = dollLMouseJoint;
-                if (i == 1) {
-                    joint = dollRMouseJoint;
-                }
-                setupDoll(new FlxPoint(startX, startY), joint);
-            }
+            var startY:Number = 20 + Math.random() * 50;
+
+            var startX:Number = 110;
+            var position:FlxPoint = new FlxPoint(startX, startY);
+            var doll:PhysicsDoll = new PhysicsDoll();
+            doll.create(m_world, position);
+            dollLGrabber = new DollGrabber();
+            dollLGrabber.create(doll, m_world);
+
+            startX = 110 + 480;
+            position = new FlxPoint(startX, startY);
+            doll = new PhysicsDoll();
+            doll.create(m_world, position);
+            dollRGrabber = new DollGrabber();
+            dollRGrabber.create(doll, m_world, DollGrabber.ARROW);
         }
 
         override public function update():void
@@ -55,30 +61,16 @@ package
             UpdateMouseWorld()
             MouseDrag();
 
-            debugText.text = "lalalalala";
-
             m_world.Step(1.0/30.0, 10, 10);
             m_world.DrawDebugData();
 
+            dollLGrabber.update();
+            dollRGrabber.update();
         }
 
         override public function endCallback():void
         {
             FlxG.switchState(new SceneState("End", new MenuState()));
-        }
-
-        public function setupDoll(position:FlxPoint, mJoint:b2MouseJoint):void
-        {
-            var doll:PhysicsDoll = new PhysicsDoll();
-            doll.create(m_world, position);
-
-            var md:b2MouseJointDef = new b2MouseJointDef();
-            md.bodyA = m_world.GetGroundBody();
-            md.bodyB = doll.midriff;
-            md.target.Set(doll.midriff.GetPosition().x, doll.midriff.GetPosition().y);
-            md.collideConnected = true;
-            md.maxForce = 3000.0 * doll.midriff.GetMass();
-            mJoint = m_world.CreateJoint(md) as b2MouseJoint;
         }
 
         public function UpdateMouseWorld():void{
