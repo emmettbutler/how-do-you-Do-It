@@ -28,7 +28,7 @@ package
 
         override public function create():void
         {
-            debugText = new FlxText(10, 30, FlxG.width, "eeeeee");
+            debugText = new FlxText(10, 30, FlxG.width, "");
             add(debugText);
 
             FlxG.mouse.show();
