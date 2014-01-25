@@ -42,14 +42,14 @@ package
 
             var position:FlxPoint = new FlxPoint(startX, startY);
             var doll:PhysicsDoll = new PhysicsDoll();
-            doll.create(m_world, position);
+            doll.create(m_world, position, PhysicsDoll.ATYPE);
             dollLGrabber = new DollGrabber();
             dollLGrabber.create(doll, m_world);
 
             startX += 480;
             position = new FlxPoint(startX, startY);
             doll = new PhysicsDoll();
-            doll.create(m_world, position);
+            doll.create(m_world, position, PhysicsDoll.BTYPE);
             dollRGrabber = new DollGrabber();
             dollRGrabber.create(doll, m_world, DollGrabber.ARROW);
         }

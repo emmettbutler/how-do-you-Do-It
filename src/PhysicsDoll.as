@@ -13,12 +13,29 @@ package
         public var m_world:b2World;
         public var m_physScale:Number = 30
         public var midriff:b2Body;
+        public var legType:Number;
 
         private const LEGSPACING:Number = 10;
 
-        public function create(_world:b2World, start:FlxPoint):void
+        public static const ATYPE:Number = 0;
+        public static const BTYPE:Number = 1;
+
+        private const LEGAMASK:uint = 0x0002;
+        private const LEGACAT:uint  = 0x0002;
+        private const LEGBMASK:uint = 0x0004;
+        private const LEGBCAT:uint  = 0x0004;
+        private const TORSOMASK:uint  = 0xFFFF;
+        private const TORSOCAT:uint  = 0x0010;
+        private const ARMMASK:uint  = 0xFFFF;
+        private const ARMCAT:uint  = 0x0020;
+        private const FOOTMASK:uint = 0xFFEF;
+        private const FOOTCAT:uint  = 0x0008;
+
+        public function create(_world:b2World, start:FlxPoint,
+                               legType:Number = LEGAMASK):void
         {
             m_world = _world;
+            legType = legType;
 
             var circ:b2CircleShape;
             var box:b2PolygonShape;
@@ -49,6 +66,10 @@ package
             fixtureDef.density = 1.0;
             fixtureDef.friction = 0.4;
             fixtureDef.restitution = 0.1;
+            filterData = new b2FilterData();
+            filterData.maskBits = TORSOMASK;
+            filterData.categoryBits = TORSOCAT;
+            fixtureDef.filter = filterData;
             bd.position.Set(startX / m_physScale, (startY + 28) / m_physScale);
             var torso1:b2Body = m_world.CreateBody(bd);
             torso1.CreateFixture(fixtureDef);
@@ -67,6 +88,10 @@ package
             fixtureDef.density = 1.0;
             fixtureDef.friction = 0.4;
             fixtureDef.restitution = 0.1;
+            filterData = new b2FilterData();
+            filterData.maskBits = ARMMASK;
+            filterData.categoryBits = ARMCAT;
+            fixtureDef.filter = filterData;
             // L
             box = new b2PolygonShape();
             box.SetAsBox(36 / m_physScale, 6.5 / m_physScale);
@@ -86,6 +111,14 @@ package
             fixtureDef.density = 1.0;
             fixtureDef.friction = 0.4;
             fixtureDef.restitution = 0.1;
+            var filterData:b2FilterData = new b2FilterData();
+            filterData.maskBits = LEGAMASK;
+            filterData.categoryBits = LEGACAT;
+            if (legType == BTYPE) {
+                filterData.maskBits = LEGBMASK;
+                filterData.categoryBits = LEGBCAT;
+            }
+            fixtureDef.filter = filterData;
             // L
             box = new b2PolygonShape();
             box.SetAsBox(7.5 / m_physScale, 44 / m_physScale);
@@ -105,6 +138,10 @@ package
             fixtureDef.density = 1.0;
             fixtureDef.friction = 0.4;
             fixtureDef.restitution = 0.1;
+            filterData = new b2FilterData();
+            filterData.maskBits = FOOTMASK;
+            filterData.categoryBits = FOOTCAT;
+            fixtureDef.filter = filterData;
             // L
             box = new b2PolygonShape();
             box.SetAsBox(6 / m_physScale, 10 / m_physScale);
