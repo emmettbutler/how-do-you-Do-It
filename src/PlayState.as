@@ -63,7 +63,7 @@ package
             dollR = new PhysicsDoll();
             dollR.create(m_world, position, PhysicsDoll.BTYPE);
             dollRGrabber = new DollGrabber();
-            dollRGrabber.create(doll, m_world, worldAABB);
+            dollRGrabber.create(dollR, m_world, worldAABB);
 
             dollController = new DollController(dollRGrabber, dollLGrabber);
         }
