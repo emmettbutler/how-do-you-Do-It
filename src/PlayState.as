@@ -17,6 +17,7 @@ package
         public var m_mouseJoint:b2MouseJoint;
         public var dollLGrabber:DollGrabber;
         public var dollRGrabber:DollGrabber;
+        public var dollCollision:DollContactListener;
         static public var mouseXWorldPhys:Number;
         static public var mouseYWorldPhys:Number;
         static public var mouseXWorld:Number;
@@ -49,6 +50,10 @@ package
             doll.create(m_world, position, PhysicsDoll.ATYPE);
             dollLGrabber = new DollGrabber();
             dollLGrabber.create(doll, m_world, worldAABB);
+
+            //setup collision listener
+            dollCollision = new DollContactListener();
+            m_world.SetContactListener(dollCollision);
 
             startX += 480;
             position = new FlxPoint(startX, startY);

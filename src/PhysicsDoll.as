@@ -14,6 +14,7 @@ package
         public var m_physScale:Number = 30
         public var midriff:b2Body;
         public var legType:Number;
+        public var torso3:b2Body
 
         private const LEGSPACING:Number = 10;
 
@@ -83,6 +84,16 @@ package
             torso2.CreateFixture(fixtureDef);
             bd.fixedRotation = false;
             midriff = torso2;
+            // Torso3
+            box = new b2PolygonShape();
+            box.SetAsBox(5 / m_physScale, 5 / m_physScale);
+            fixtureDef.shape = box;
+            bd.position.Set(startX / m_physScale, (startY + 68) / m_physScale);
+            torso3 = m_world.CreateBody(bd);
+            fixtureDef.isSensor = true;
+            torso3.CreateFixture(fixtureDef);
+            fixtureDef.isSensor = false;
+            bd.fixedRotation = false;
 
             // UpperArm
             fixtureDef.density = 1.0;
@@ -185,6 +196,12 @@ package
             jd.Initialize(torso1, torso2, new b2Vec2(startX / m_physScale, (startY + 35) / m_physScale));
             m_world.CreateJoint(jd);
 
+            // stomach to hitbox
+            jd.lowerAngle = -15 / (180/Math.PI);
+            jd.upperAngle = 15 / (180/Math.PI);
+            jd.Initialize(torso2, torso3, new b2Vec2(startX / m_physScale, (startY + 65) / m_physScale));
+            m_world.CreateJoint(jd);
+
             // Torso to upper leg
             // L
             jd.lowerAngle = -25 / (180/Math.PI);
@@ -214,6 +231,7 @@ package
         {
 
         }
+
     }
 
 }
