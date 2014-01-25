@@ -12,6 +12,7 @@ package
     {
         public var m_world:b2World;
         public var m_physScale:Number = 30
+        public var midriff:b2Body;
 
         public function create(_world:b2World, start:FlxPoint):void
         {
@@ -59,6 +60,7 @@ package
             bd.position.Set(startX / m_physScale, (startY + 43) / m_physScale);
             var torso2:b2Body = m_world.CreateBody(bd);
             torso2.CreateFixture(fixtureDef);
+            midriff = torso2;
             // Torso3
             box.SetAsBox(15 / m_physScale, 10 / m_physScale);
             fixtureDef.shape = box;

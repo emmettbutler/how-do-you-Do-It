@@ -63,6 +63,14 @@ package
 
                 var doll:PhysicsDoll = new PhysicsDoll();
                 doll.create(m_world, new FlxPoint(startX, startY));
+
+                var md:b2MouseJointDef = new b2MouseJointDef();
+                md.bodyA = m_world.GetGroundBody();
+                md.bodyB = doll.midriff;
+                md.target.Set(5, 5);
+                md.collideConnected = true;
+                md.maxForce = 300.0 * doll.midriff.GetMass();
+                m_mouseJoint = m_world.CreateJoint(md) as b2MouseJoint;
             }
         }
 
