@@ -19,6 +19,9 @@ package
         static public var mouseXWorld:Number;
         static public var mouseYWorld:Number;
         public var m_mouseJoint:b2MouseJoint;
+        public var timeFrame:Number = 0;
+        public var timeSec:Number = 0;
+        public var endTime:Number = 5;
 
         public var debugText:FlxText;
 
@@ -260,6 +263,18 @@ package
             m_world.DrawDebugData();
 
             debugText.text = mouseXWorldPhys + " x " + mouseYWorldPhys;
+
+            super.update();
+            timeFrame++;
+
+            if(timeFrame%100 == 0){
+                timeSec++;
+            }
+
+            if(timeSec == endTime) {
+                //end
+                FlxG.switchState(new SceneState("End", new MenuState()));
+            }
         }
 
         public function UpdateMouseWorld():void{
