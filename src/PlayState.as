@@ -22,16 +22,20 @@ package
         public var timeFrame:Number = 0;
         public var timeSec:Number = 0;
         public var endTime:Number = 5;
+        public var thinking:ScrollingText;
 
         public var debugText:FlxText;
 
         override public function create():void
         {
-            debugText = new FlxText(10, 30, FlxG.width, "");
+            debugText = new FlxText(10, 30, FlxG.width, "eeeeee");
             add(debugText);
 
             FlxG.mouse.show();
             setupWorld();
+
+            thinking = new ScrollingText();
+            add(thinking);
 
             // Create border of boxes
             var wall:b2PolygonShape= new b2PolygonShape();
@@ -79,6 +83,8 @@ package
             UpdateMouseWorld()
             MouseDrag();
 
+            debugText.text = "lalalalala";
+
             m_world.Step(1.0/30.0, 10, 10);
             m_world.DrawDebugData();
 
@@ -91,7 +97,7 @@ package
 
             if(timeSec == endTime) {
                 //end
-                FlxG.switchState(new SceneState("End", new MenuState()));
+                //FlxG.switchState(new SceneState("End", new MenuState()));
             }
         }
 
