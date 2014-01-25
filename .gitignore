@@ -1,5 +1,8 @@
 nohup.out
 .*.swp
+.*.swo
+.*.swm
+.*.swn
 .*.un~
 .DS_Store
 *.swf

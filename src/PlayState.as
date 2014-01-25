@@ -19,6 +19,8 @@ package
         public var dollRGrabber:DollGrabber;
         public var dollController:DollController;
         public var dollCollision:DollContactListener;
+        public var dollL:PhysicsDoll;
+        public var dollR:PhysicsDoll;
         static public var mouseXWorldPhys:Number;
         static public var mouseYWorldPhys:Number;
         static public var mouseXWorld:Number;
@@ -47,10 +49,10 @@ package
             worldAABB.upperBound.Set(640 / m_physScale, 480 / m_physScale);
 
             var position:FlxPoint = new FlxPoint(startX, startY);
-            var doll:PhysicsDoll = new PhysicsDoll();
-            doll.create(m_world, position, PhysicsDoll.ATYPE);
+            dollL = new PhysicsDoll();
+            dollL.create(m_world, position, PhysicsDoll.ATYPE);
             dollLGrabber = new DollGrabber();
-            dollLGrabber.create(doll, m_world, worldAABB);
+            dollLGrabber.create(dollL, m_world, worldAABB);
 
             //setup collision listener
             dollCollision = new DollContactListener();
@@ -58,8 +60,8 @@ package
 
             startX += 480;
             position = new FlxPoint(startX, startY);
-            doll = new PhysicsDoll();
-            doll.create(m_world, position, PhysicsDoll.BTYPE);
+            dollR = new PhysicsDoll();
+            dollR.create(m_world, position, PhysicsDoll.BTYPE);
             dollRGrabber = new DollGrabber();
             dollRGrabber.create(doll, m_world, worldAABB);
 
@@ -77,6 +79,8 @@ package
             m_world.DrawDebugData();
 
             dollController.update();
+            dollL.update();
+            dollR.update();
             dollLGrabber.update();
             dollRGrabber.update();
         }
