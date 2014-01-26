@@ -105,7 +105,7 @@ package
             smoke.fill(0x55000000);
             add(smoke);
 
-            howText = new FlxText(10, FlxG.height/2, FlxG.width, "WASDQE to play");
+            howText = new FlxText(10, FlxG.height/2, FlxG.width, "JK WASDto play");
             add(howText);
 
             if(FlxG.music == null){

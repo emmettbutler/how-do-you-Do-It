@@ -29,6 +29,7 @@ package
         public var girl3_sprite:FlxSprite;
         public var dolls_sprite:FlxSprite;
         public var girlAnimLock:Boolean = false;
+        public var sceneLock:Boolean = false;
 
         public var nextState:FlxState;
         public var time_frame:Number = 0;
@@ -97,27 +98,18 @@ package
                     FlxG.playMusic(SndBGM, ggj.VOLUME);
                 }
             }
+
+            FlxG.play(doorOpen);
         }
 
         override public function update():void
         {
             super.update();
-            time_frame++;
-            if(time_frame == 50){
-                FlxG.play(doorOpen);
-            } else if(time_frame == 150){
-                FlxG.play(doorClose);
-            } else if(time_frame == 200){
-                FlxG.play(garageOpen);
-            } else if(time_frame == 300){
-                FlxG.play(carDoor);
-            } else if(time_frame == 400){
-                FlxG.play(carLeave);
-            }
 
             if((timeFrame/100)%3 == 0){
                 current_scene++;
                 if(current_scene == 2){
+                    FlxG.play(doorClose);
                     cam_moving = true;
                     cam_target_point = new FlxPoint(176+(FlxG.width/2),FlxG.height/2);
                 }
@@ -134,7 +126,12 @@ package
                     girl2_sprite.alpha += .02;
                     if(!girlAnimLock && girl2_sprite.alpha >= 1){
                         girl2_sprite.play("run");
+                        FlxG.play(carLeave);
                         girlAnimLock = true;
+                    }
+                    if (!sceneLock) {
+                        sceneLock = true;
+                        FlxG.play(carDoor);
                     }
                 }
                 if(current_scene == 3){

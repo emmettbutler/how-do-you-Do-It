@@ -89,7 +89,7 @@ package
                 ret = true;
             }
 
-            if (FlxG.keys.E) {
+            if (FlxG.keys.J) {
                 ret = true;
                 if (rotateMirror) {
                     angle1 += dollRotateSpeed;
@@ -98,7 +98,7 @@ package
                     angle2 -= dollRotateSpeed;
                     arm2.turn(false);
                 }
-            } else if (FlxG.keys.Q) {
+            } else if (FlxG.keys.K) {
                 ret = true;
                 if (rotateMirror) {
                     angle2 -= dollRotateSpeed;
