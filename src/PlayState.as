@@ -88,7 +88,7 @@ package
             dollR.create(m_world, position, PhysicsDoll.BTYPE);
             dollRGrabber.create(dollR, m_world, worldAABB);
 
-            dollController = new DollController(dollRGrabber, dollLGrabber);
+            dollController = new DollController(dollRGrabber, dollLGrabber, rArm, lArm);
         }
 
         override public function update():void

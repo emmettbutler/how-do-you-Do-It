@@ -12,14 +12,19 @@ package
     {
         public var doll1:DollGrabber;
         public var doll2:DollGrabber;
+        public var arm1:Arm;
+        public var arm2:Arm;
         static public var dollTranslateSpeed:Number = .045;
         static public var dollRotateSpeed:Number = .045;
         public var t:FlxText;
 
-        public function DollController(doll1:DollGrabber, doll2:DollGrabber)
+        public function DollController(doll1:DollGrabber, doll2:DollGrabber,
+                                       arm1:Arm, arm2:Arm)
         {
             this.doll1 = doll1;
             this.doll2 = doll2;
+            this.arm1 = arm1;
+            this.arm2 = arm2;
             t = new FlxText(100,100,100,"");
             FlxG.state.add(t);
         }
@@ -51,8 +56,13 @@ package
 
             if (FlxG.keys.E) {
                 angle1 += dollRotateSpeed;
+                arm1.turn(true);
             } else if (FlxG.keys.Q) {
-                angle2 += dollRotateSpeed;
+                angle2 -= dollRotateSpeed;
+                arm2.turn(false);
+            } else {
+                arm1.stopTurning();
+                arm2.stopTurning();
             }
 
             if (left) {

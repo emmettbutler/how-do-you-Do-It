@@ -54,6 +54,24 @@ package
                                         forearm.y + forearm.height/2);
         }
 
+        public function turn(clockwise:Boolean):void
+        {
+            var turnAmt:Number = 10;
+            if (clockwise) {
+                hand.angle = turnAmt;
+                fingers.angle = turnAmt;
+            } else {
+                hand.angle = -turnAmt;
+                fingers.angle = -turnAmt;
+            }
+        }
+
+        public function stopTurning():void
+        {
+            hand.angle = 0;
+            fingers.angle = 0;
+        }
+
         public function update():void
         {
             var a:FlxPoint = this.armBase;
