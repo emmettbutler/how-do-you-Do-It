@@ -39,7 +39,11 @@ package
             targetAABB.lowerBound.Set(target.x, target.y);
             targetAABB.upperBound.Set(target.x, target.y);
             if (worldBounds.Contains(targetAABB)) {
-                m_mouseJoint.SetTarget(target);
+                var midpoint:Number = worldBounds.upperBound.x/2;
+                if ((m_mouseJoint.GetTarget().x < midpoint && target.x < midpoint)
+                || (m_mouseJoint.GetTarget().x > midpoint && target.x > midpoint)) {
+                    m_mouseJoint.SetTarget(target);
+                }
             }
             doll.midriff.SetAngle(angle);
         }

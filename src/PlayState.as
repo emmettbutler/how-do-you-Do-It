@@ -41,8 +41,8 @@ package
             thinking = new ScrollingText();
             add(thinking);
 
-            var startY:Number = 20 + Math.random() * 50;
-            var startX:Number = 110;
+            var startY:Number = 80;
+            var startX:Number = 130;
 
             var worldAABB:b2AABB = new b2AABB();
             worldAABB.lowerBound.Set(0, 0);
@@ -58,7 +58,7 @@ package
             dollCollision = new DollContactListener();
             m_world.SetContactListener(dollCollision);
 
-            startX += 480;
+            startX += 400;
             position = new FlxPoint(startX, startY);
             dollR = new PhysicsDoll();
             dollR.create(m_world, position, PhysicsDoll.BTYPE);
