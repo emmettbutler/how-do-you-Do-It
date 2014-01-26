@@ -52,6 +52,7 @@ package
         {
             started = false;
 
+
             var bg:FlxSprite = new FlxSprite(0, 0);
             bg.loadGraphic(ImgBG, true, true, 320, 240, true);
             add(bg);
@@ -126,7 +127,9 @@ package
                 endTime++;
             }
 
-            started = dollController.update(endTime - timeSec);
+            if(dollController.update(endTime - timeSec)){
+                started = true;
+            }
 
             if (started) {
                 thinking.paused = false;
