@@ -31,6 +31,9 @@ package
         static public var mouseYWorld:Number;
 
         public var thinking:ScrollingText;
+        public var thinking_two:ScrollingText;
+        public var thinking_counter:Number = 0;
+        public var bubble_width:Number = FlxG.width/2;
         public var face:Face;
         public var body:FlxSprite;
         public var lArm:Arm;
@@ -111,6 +114,12 @@ package
             rArm.update();
 
             face.update();
+
+            /*if(thinking.pos_x > bubble_width){
+                thinking_counter
+                thinking_two = new ScrollingText();
+                add(thinking_two);
+            }*/
         }
 
         override public function endCallback():void
