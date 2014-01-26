@@ -14,6 +14,7 @@ package
     {
         [Embed(source = "../assets/bgm.mp3")] private var SndBGM:Class;
         [Embed(source="../assets/girl_body.png")] private var ImgBody:Class;
+        [Embed(source="../assets/mainbg.png")] private var ImgBG:Class;
 
         public var m_physScale:Number = 30
         public var m_world:b2World;
@@ -39,17 +40,21 @@ package
 
         override public function create():void
         {
+            var bg:FlxSprite = new FlxSprite(0, 0);
+            bg.loadGraphic(ImgBG, true, true, 320, 240, true);
+            add(bg);
+
             debugText = new FlxText(10, 30, FlxG.width, "");
             add(debugText);
 
             FlxG.mouse.show();
             setupWorld();
 
-            body = new FlxSprite(0, 126);
+            body = new FlxSprite(-70, 56);
             body.loadGraphic(ImgBody, true, true, 294, 190, true);
             add(body);
 
-            face = new Face(60, 2);
+            face = new Face(-10, -68);
             add(face);
 
             thinking = new ScrollingText();
