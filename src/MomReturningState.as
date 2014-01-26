@@ -10,6 +10,7 @@ package
         [Embed(source = "../assets/girl3.png")] private var girl3:Class;
         [Embed(source = "../assets/dolls.png")] private var dolls:Class;
         [Embed(source = "../assets/mom1.png")] private var mom:Class;
+        [Embed(source = "../assets/mom_shock.png")] private var mom_shock:Class;
 
         public var nextState:FlxState;
         public var time_frame:Number = 0;
@@ -22,10 +23,12 @@ package
         public var girl3_sprite:FlxSprite;
         public var dolls_sprite:FlxSprite;
         public var mom_sprite:FlxSprite;
+        public var caught:Boolean
 
-        public function MomReturningState(next:FlxState) {
+        public function MomReturningState(next:EndState, caught:Boolean) {
             super();
             this.nextState = next;
+            this.caught = caught;
         }
 
         override public function create():void
@@ -58,8 +61,15 @@ package
             dolls_sprite.loadGraphic(dolls, true, true, 76, 55, true);
             add(dolls_sprite);
 
-            mom_sprite = new FlxSprite(22, 49);
-            mom_sprite.loadGraphic(mom, true, true, 77, 151, true);
+            if (this.caught) {
+                mom_sprite = new FlxSprite(22, 29);
+                mom_sprite.loadGraphic(mom_shock, true, true, 101, 174, true);
+                mom_sprite.addAnimation("run", [0, 1], 3, true);
+                mom_sprite.play("run");
+            } else {
+                mom_sprite = new FlxSprite(22, 49);
+                mom_sprite.loadGraphic(mom, true, true, 77, 151, true);
+            }
             add(mom_sprite);
             mom_sprite.alpha = 0;
 

@@ -55,10 +55,11 @@ package
             add(outside_bg);
             outside_bg.scrollFactor = new FlxPoint(.5, .5);
 
-            car_sprite = new FlxSprite(300, 69);
+            car_sprite = new FlxSprite(250, 69);
             car_sprite.loadGraphic(car, true, true, 104, 54, true);
             car_sprite.alpha = 0;
             add(car_sprite);
+            car_sprite.scrollFactor = new FlxPoint(.7, .7);
 
             var house_bg:FlxSprite = new FlxSprite(0, 0);
             house_bg.loadGraphic(house, true, true, 1500/2, 360, true);

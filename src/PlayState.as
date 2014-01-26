@@ -177,7 +177,7 @@ package
 
         override public function endCallback():void
         {
-            FlxG.switchState(new MomReturningState(new EndState(dollCollision.sex, dollController.isClose)));
+            FlxG.switchState(new MomReturningState(new EndState(dollCollision.sex, dollController.isClose), dollController.isClose));
         }
 
         public function UpdateMouseWorld():void{
