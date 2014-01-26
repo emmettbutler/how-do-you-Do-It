@@ -8,6 +8,7 @@ package
         [Embed(source = "../assets/house.png")] private var house:Class;
         [Embed(source = "../assets/outside.png")] private var outside:Class;
         [Embed(source = "../assets/girl3.png")] private var girl3:Class;
+        [Embed(source = "../assets/girl_caught.png")] private var girl_caught:Class;
         [Embed(source = "../assets/dolls.png")] private var dolls:Class;
         [Embed(source = "../assets/mom1.png")] private var mom:Class;
         [Embed(source = "../assets/mom_shock.png")] private var mom_shock:Class;
@@ -53,8 +54,13 @@ package
             house_bg.addAnimation("open", [1], 1, false);
             add(house_bg);
 
-            girl3_sprite = new FlxSprite(525, 174);
-            girl3_sprite.loadGraphic(girl3, true, true, 60, 101, true);
+            if (this.caught) {
+                girl3_sprite = new FlxSprite(525, 174);
+                girl3_sprite.loadGraphic(girl_caught, true, true, 59, 95, true);
+            } else {
+                girl3_sprite = new FlxSprite(525, 174);
+                girl3_sprite.loadGraphic(girl3, true, true, 60, 101, true);
+            }
             add(girl3_sprite);
 
             dolls_sprite = new FlxSprite(598, 178);
