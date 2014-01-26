@@ -48,9 +48,7 @@ package
 
             if (FlxG.keys.E) {
                 angle1 += dollRotateSpeed;
-                angle2 -= dollRotateSpeed;
             } else if (FlxG.keys.Q) {
-                angle1 -= dollRotateSpeed;
                 angle2 += dollRotateSpeed;
             }
 
