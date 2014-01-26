@@ -25,11 +25,11 @@ package
             add(t);
 
             if(FlxG.music == null){
-                FlxG.playMusic(SndBGM, .7);
+                FlxG.playMusic(SndBGM, ggj.VOLUME);
             } else {
                 FlxG.music.resume();
                 if(!FlxG.music.active){
-                    FlxG.playMusic(SndBGM, .7);
+                    FlxG.playMusic(SndBGM, ggj.VOLUME);
                 }
             }
         }

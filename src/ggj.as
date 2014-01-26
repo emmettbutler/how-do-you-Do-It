@@ -4,8 +4,10 @@ package{
     [Frame(factoryClass="Preloader")]
 
     public class ggj extends FlxGame{
+        public static const VOLUME:Number = .4;
+
         public function ggj(){
-            super(320,240,PlayState,2);
+            super(320,240,MenuState,2);
         }
     }
 }
