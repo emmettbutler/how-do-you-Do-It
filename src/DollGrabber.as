@@ -35,11 +35,11 @@ package
 
         }
 
-        public function SetTransform(target:b2Vec2, angle:Number):void{
+        public function SetTransform(target:b2Vec2, angle:Number, toss:Boolean=false):void{
             var targetAABB:b2AABB = new b2AABB();
             targetAABB.lowerBound.Set(target.x, target.y);
             targetAABB.upperBound.Set(target.x, target.y);
-            if (worldBounds.Contains(targetAABB)) {
+            if (worldBounds.Contains(targetAABB) || toss) {
                 var midpoint:Number = worldBounds.upperBound.x/2;
                 var lower:Number = midpoint - 1;
                 var upper:Number = midpoint + 1;

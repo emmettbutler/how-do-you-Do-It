@@ -20,6 +20,7 @@ package
         static public var dollRotateSpeed:Number;
         public var t:FlxText;
         public var rotateMirror:Boolean = false;
+        public var isClose:Boolean;
 
         public var timeFrame:Number = 0;
         public var timeSec:Number = 0;
@@ -37,13 +38,27 @@ package
             FlxG.state.add(t);
         }
 
-        public function update():void
+        public function update(timeRemain:Number):void
         {
             timeFrame++;
 
             if(timeFrame%500 == 0){
                 rotateMirror = rotateMirror ? false : true;
             }
+
+            var toss:Boolean = false;
+            if (timeRemain < 2) {
+                toss = true;
+            }
+
+            var distance:Number = dollProximity(toss);
+
+            if(distance < 7.5){
+                this.isClose = true;
+            } else {
+                this.isClose = false;
+            }
+            //t.text = this.isClose.toString();
 
             var target1:b2Vec2 = doll1.m_mouseJoint.GetTarget().Copy();
             var target2:b2Vec2 = doll2.m_mouseJoint.GetTarget().Copy();
@@ -53,7 +68,7 @@ package
             var right:Boolean = false;
             var up:Boolean = false;
             var down:Boolean = false;
-            if (FlxG.keys.D) {
+            if (FlxG.keys.D || (toss && distance > 7.5)) {
                 right = true;
                 left = false;
             } else if (FlxG.keys.A) {
@@ -89,6 +104,10 @@ package
                 arm2.stopTurning();
             }
 
+            if (toss) {
+                dollTranslateSpeed = 1;
+            }
+
             if (left) {
                 target1.x -= dollTranslateSpeed;
                 target2.x += dollTranslateSpeed;
@@ -106,23 +125,26 @@ package
                 target2.y += dollTranslateSpeed;
             }
 
-            doll1.SetTransform(target1, angle1);
-            doll2.SetTransform(target2, angle2);
-            dollProximity();
+            doll1.SetTransform(target1, angle1, toss);
+            doll2.SetTransform(target2, angle2, toss);
         }
 
-        public function dollProximity():void{
+        public function dollProximity(toss:Boolean):Number{
             var a:Number = Math.abs(doll1.doll.midriff.GetPosition().x - doll2.doll.midriff.GetPosition().y);
             var b:Number = Math.abs(doll1.doll.midriff.GetPosition().y - doll2.doll.midriff.GetPosition().x);
-            //c = sqrt(a^2+b^2)
             var distance:Number = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
-            //t.text = distance.toString();
+
+            if (toss) return distance;
 
             if(distance < 7.5){
                 dollTranslateSpeed = speed_up;
+                this.isClose == true;
             } else {
                 dollTranslateSpeed = speed;
+                this.isClose == false;
             }
+
+            return distance;
         }
     }
 }

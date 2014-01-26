@@ -111,7 +111,7 @@ package
             m_world.Step(1.0/30.0, 10, 10);
             //m_world.DrawDebugData();
 
-            dollController.update();
+            dollController.update(endTime - timeSec);
             dollL.update();
             dollR.update();
             dollLGrabber.update();
@@ -131,7 +131,7 @@ package
 
         override public function endCallback():void
         {
-            FlxG.switchState(new EndState(dollCollision.sex, dollCollision.isColliding));
+            FlxG.switchState(new EndState(dollCollision.sex, dollController.isClose));
         }
 
         public function UpdateMouseWorld():void{
