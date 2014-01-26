@@ -9,6 +9,7 @@ package
         [Embed(source = "../assets/outside.png")] private var outside:Class;
         [Embed(source = "../assets/girl3.png")] private var girl3:Class;
         [Embed(source = "../assets/girl_caught.png")] private var girl_caught:Class;
+        [Embed(source = "../assets/girl_notcaught.png")] private var girl_notcaught:Class;
         [Embed(source = "../assets/dolls.png")] private var dolls:Class;
         [Embed(source = "../assets/mom1.png")] private var mom:Class;
         [Embed(source = "../assets/mom_shock.png")] private var mom_shock:Class;
@@ -22,7 +23,6 @@ package
         public var scene_time:Number = 1;
         public var current_scene:Number = 1;
         public var girl3_sprite:FlxSprite;
-        public var dolls_sprite:FlxSprite;
         public var mom_sprite:FlxSprite;
         public var caught:Boolean
 
@@ -58,14 +58,10 @@ package
                 girl3_sprite = new FlxSprite(525, 174);
                 girl3_sprite.loadGraphic(girl_caught, true, true, 59, 95, true);
             } else {
-                girl3_sprite = new FlxSprite(525, 174);
-                girl3_sprite.loadGraphic(girl3, true, true, 60, 101, true);
+                girl3_sprite = new FlxSprite(554, 171);
+                girl3_sprite.loadGraphic(girl_notcaught, true, true, 108, 102, true);
             }
             add(girl3_sprite);
-
-            dolls_sprite = new FlxSprite(598, 178);
-            dolls_sprite.loadGraphic(dolls, true, true, 76, 55, true);
-            add(dolls_sprite);
 
             if (this.caught) {
                 mom_sprite = new FlxSprite(22, 29);
@@ -117,7 +113,6 @@ package
 
             if(current_scene == 2){
                 girl3_sprite.alpha -= .02;
-                dolls_sprite.alpha -= .02;
             }
         }
 
