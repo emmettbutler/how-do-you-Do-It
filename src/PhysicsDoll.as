@@ -399,7 +399,7 @@ package
                 footLSprite.loadGraphic(ImgMFootL, true, true, 23, 14, true);
                 footRSprite.loadGraphic(ImgMFootR, true, true, 23, 14, true);
             }
-            /*FlxG.state.add(armLSprite);
+            FlxG.state.add(armLSprite);
             FlxG.state.add(armRSprite);
             FlxG.state.add(footLSprite);
             FlxG.state.add(footRSprite);
@@ -407,7 +407,7 @@ package
             FlxG.state.add(legLSprite);
             FlxG.state.add(legRSprite);
             FlxG.state.add(chestSprite);
-            FlxG.state.add(headSprite);*/
+            FlxG.state.add(headSprite);
         }
     }
 }
