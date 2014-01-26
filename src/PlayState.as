@@ -75,7 +75,7 @@ package
             var startX:Number = 170;
 
             var worldAABB:b2AABB = new b2AABB();
-            worldAABB.lowerBound.Set(0, 0);
+            worldAABB.lowerBound.Set(0, 220 / m_physScale);
             worldAABB.upperBound.Set(640 / m_physScale, 480 / m_physScale);
 
             dollRGrabber = new DollGrabber();
@@ -106,7 +106,7 @@ package
             smoke.fill(0x55000000);
             add(smoke);
 
-            howText = new FlxText(10, FlxG.height/2, FlxG.width, "JK WASDto play");
+            howText = new FlxText(10, FlxG.height/2, FlxG.width, "JK WASD to play");
             add(howText);
 
             if(FlxG.music == null){
