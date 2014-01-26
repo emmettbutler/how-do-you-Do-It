@@ -12,8 +12,8 @@ package
     {
         public var doll1:DollGrabber;
         public var doll2:DollGrabber;
-        static public var dollTranslateSpeed:Number = .1;
-        static public var dollRotateSpeed:Number = .1;
+        static public var dollTranslateSpeed:Number = .045;
+        static public var dollRotateSpeed:Number = .045;
         public var t:FlxText;
 
         public function DollController(doll1:DollGrabber, doll2:DollGrabber)
@@ -84,12 +84,10 @@ package
             var distance:Number = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
             //t.text = distance.toString();
 
-            if(distance < 10){
-                dollTranslateSpeed = .5;
-                dollRotateSpeed = .5;
+            if(distance < 9){
+                dollTranslateSpeed = .2;
             } else {
-                dollTranslateSpeed = .1;
-                dollRotateSpeed = .1;
+                dollTranslateSpeed = .045;
             }
         }
     }

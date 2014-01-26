@@ -93,7 +93,7 @@ package
             MouseDrag();
 
             m_world.Step(1.0/30.0, 10, 10);
-            //m_world.DrawDebugData();
+            m_world.DrawDebugData();
 
             dollController.update();
             dollL.update();
