@@ -32,6 +32,8 @@ package
         public var thinking:ScrollingText;
         public var face:Face;
         public var body:FlxSprite;
+        public var lArm:Arm;
+        public var rArm:Arm;
 
         public var debugText:FlxText;
 
@@ -50,11 +52,14 @@ package
             face = new Face(60, 2);
             add(face);
 
+            lArm = new Arm(50, false);
+            rArm = new Arm(220, true);
+
             thinking = new ScrollingText();
             add(thinking);
 
-            var startY:Number = 80;
-            var startX:Number = 130;
+            var startY:Number = 200;
+            var startX:Number = 170;
 
             var worldAABB:b2AABB = new b2AABB();
             worldAABB.lowerBound.Set(0, 0);
@@ -70,7 +75,7 @@ package
             dollCollision = new DollContactListener();
             m_world.SetContactListener(dollCollision);
 
-            startX += 400;
+            startX = 510;
             position = new FlxPoint(startX, startY);
             dollR = new PhysicsDoll();
             dollR.create(m_world, position, PhysicsDoll.BTYPE);
@@ -198,21 +203,21 @@ package
             // Left
             wallBd.position.Set( -95 / m_physScale, 480 / m_physScale / 2);
             wall.SetAsBox(100/m_physScale, 480/m_physScale/2);
-            wallB = m_world.CreateBody(wallBd);
-            wallB.CreateFixture2(wall);
+            //wallB = m_world.CreateBody(wallBd);
+            //wallB.CreateFixture2(wall);
             // Right
             wallBd.position.Set((640 + 95) / m_physScale, 480 / m_physScale / 2);
-            wallB = m_world.CreateBody(wallBd);
-            wallB.CreateFixture2(wall);
+            //wallB = m_world.CreateBody(wallBd);
+            //wallB.CreateFixture2(wall);
             // Top
             wallBd.position.Set(640 / m_physScale / 2, -95 / m_physScale);
             wall.SetAsBox(680/m_physScale/2, 100/m_physScale);
-            wallB = m_world.CreateBody(wallBd);
-            wallB.CreateFixture2(wall);
+            //wallB = m_world.CreateBody(wallBd);
+            //wallB.CreateFixture2(wall);
             // Bottom
             wallBd.position.Set(640 / m_physScale / 2, (480 + 95) / m_physScale);
-            wallB = m_world.CreateBody(wallBd);
-            wallB.CreateFixture2(wall);
+            //wallB = m_world.CreateBody(wallBd);
+            //wallB.CreateFixture2(wall);
         }
     }
 }
