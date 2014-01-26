@@ -51,7 +51,6 @@ package
 
         override public function create():void
         {
-            endTime = 4;
             started = false;
 
             var bg:FlxSprite = new FlxSprite(0, 0);
