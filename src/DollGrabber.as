@@ -41,8 +41,11 @@ package
             targetAABB.upperBound.Set(target.x, target.y);
             if (worldBounds.Contains(targetAABB)) {
                 var midpoint:Number = worldBounds.upperBound.x/2;
-                if ((m_mouseJoint.GetTarget().x < midpoint && target.x < midpoint)
-                    || (m_mouseJoint.GetTarget().x > midpoint && target.x > midpoint)) {
+                var lower:Number = midpoint - 1;
+                var upper:Number = midpoint + 1;
+
+                if ((m_mouseJoint.GetTarget().x < midpoint && target.x < lower) ||
+                    (m_mouseJoint.GetTarget().x > midpoint && target.x > upper)) {
                     m_mouseJoint.SetTarget(target);
                     this.pos = target;
                 }

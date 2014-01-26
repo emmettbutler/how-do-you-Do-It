@@ -19,6 +19,10 @@ package
         static public var dollTranslateSpeed:Number;
         static public var dollRotateSpeed:Number;
         public var t:FlxText;
+        public var rotateMirror:Boolean = false;
+
+        public var timeFrame:Number = 0;
+        public var timeSec:Number = 0;
 
         public function DollController(doll1:DollGrabber, doll2:DollGrabber,
                                        arm1:Arm, arm2:Arm)
@@ -35,6 +39,12 @@ package
 
         public function update():void
         {
+            timeFrame++;
+
+            if(timeFrame%500 == 0){
+                rotateMirror = rotateMirror ? false : true;
+            }
+
             var target1:b2Vec2 = doll1.m_mouseJoint.GetTarget().Copy();
             var target2:b2Vec2 = doll2.m_mouseJoint.GetTarget().Copy();
             var angle1:Number = doll1.doll.midriff.GetAngle();
@@ -59,11 +69,21 @@ package
             }
 
             if (FlxG.keys.E) {
-                angle1 += dollRotateSpeed;
-                arm1.turn(true);
+                if (rotateMirror) {
+                    angle1 += dollRotateSpeed;
+                    arm1.turn(true);
+                } else {
+                    angle2 -= dollRotateSpeed;
+                    arm2.turn(false);
+                }
             } else if (FlxG.keys.Q) {
-                angle2 -= dollRotateSpeed;
-                arm2.turn(false);
+                if (rotateMirror) {
+                    angle2 -= dollRotateSpeed;
+                    arm2.turn(false);
+                } else {
+                    angle1 += dollRotateSpeed;
+                    arm1.turn(true);
+                }
             } else {
                 arm1.stopTurning();
                 arm2.stopTurning();

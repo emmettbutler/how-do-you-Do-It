@@ -401,11 +401,11 @@ package
             }
             FlxG.state.add(armLSprite);
             FlxG.state.add(armRSprite);
-            FlxG.state.add(footLSprite);
-            FlxG.state.add(footRSprite);
             FlxG.state.add(hipsSprite);
             FlxG.state.add(legLSprite);
             FlxG.state.add(legRSprite);
+            FlxG.state.add(footLSprite);
+            FlxG.state.add(footRSprite);
             FlxG.state.add(chestSprite);
             FlxG.state.add(headSprite);
         }
