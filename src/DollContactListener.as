@@ -24,6 +24,7 @@ package
             var bodyB:b2Fixture = contact.GetFixtureB();
 
             if(bodyA.IsSensor() && bodyB.IsSensor()){
+                this.face.increaseBlush();
                 //A HEAD TO B HEAD
                 if(bodyA.GetUserData().toString() == PhysicsDoll.COL_HEAD){
                     if(bodyB.GetUserData().toString() == PhysicsDoll.COL_HEAD){

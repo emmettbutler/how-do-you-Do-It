@@ -5,6 +5,9 @@ package
     public class Face extends FlxSprite
     {
         [Embed(source="../assets/faces_strip.png")] private var ImgFace:Class;
+        [Embed(source="../assets/blush.png")] private var ImgBlush:Class;
+
+        public var blush:FlxSprite;
 
         public function Face(x:Number, y:Number)
         {
@@ -18,6 +21,12 @@ package
             addAnimation("confused", [6]);
             addAnimation("surprised", [7]);
             play("neutral");
+            FlxG.state.add(this);
+
+            blush = new FlxSprite(x, y);
+            blush.loadGraphic(ImgBlush, true, true, 205, 202, true);
+            FlxG.state.add(blush);
+            blush.alpha = 0;
         }
 
         override public function update():void
@@ -29,6 +38,21 @@ package
                 play("lookaside");
             } else if (pick < 2) {
                 play("blink");
+            }
+            decreaseBlush();
+        }
+
+        public function increaseBlush():void
+        {
+            if (blush.alpha < 1) {
+                blush.alpha += .2;
+            }
+        }
+
+        public function decreaseBlush():void
+        {
+            if (blush.alpha > 0) {
+                blush.alpha -= .002;
             }
         }
     }

@@ -50,7 +50,6 @@ package
             debugText = new FlxText(10, 30, FlxG.width, "");
             add(debugText);
 
-            FlxG.mouse.show();
             setupWorld();
 
             body = new FlxSprite(-70, 56);
@@ -58,7 +57,6 @@ package
             add(body);
 
             face = new Face(-10, -68);
-            add(face);
 
             thinking = new ScrollingText();
             add(thinking);
