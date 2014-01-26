@@ -7,11 +7,14 @@ package
         [Embed(source="../assets/girl_forearm.png")] private var ImgForearm:Class;
         [Embed(source="../assets/girl_handL.png")] private var ImgHandL:Class;
         [Embed(source="../assets/girl_handR.png")] private var ImgHandR:Class;
+        [Embed(source="../assets/girl_fingersL.png")] private var ImgFingersL:Class;
+        [Embed(source="../assets/girl_fingersR.png")] private var ImgFingersR:Class;
 
         public var m_physScale:Number = 30
 
         public var forearm:FlxSprite;
         public var hand:FlxSprite;
+        public var fingers:FlxSprite;
 
         public var heldDoll:DollGrabber;
         public var armBase:FlxPoint;
@@ -39,6 +42,14 @@ package
             }
             FlxG.state.add(hand);
 
+            fingers = new FlxSprite(x, 120);
+            if (rt) {
+                fingers.loadGraphic(ImgFingersL, true, true, 88, 89, true);
+            } else {
+                fingers.loadGraphic(ImgFingersR, true, true, 88, 89, true);
+            }
+            FlxG.state.add(fingers);
+
             this.armBase = new FlxPoint(forearm.x + forearm.width/2,
                                         forearm.y + forearm.height/2);
         }
@@ -59,6 +70,9 @@ package
 
             hand.x = this.heldDoll.pos.x * m_physScale / 2 - hand.width/2;
             hand.y = this.heldDoll.pos.y * m_physScale / 2 - hand.height/2;
+
+            fingers.x = this.heldDoll.pos.x * m_physScale / 2 - fingers.width/2;
+            fingers.y = this.heldDoll.pos.y * m_physScale / 2 - fingers.height/2;
 
             //forearm.x = this.heldDoll.pos.x * m_physScale / 2 - hand.width/2;
             forearm.y = this.heldDoll.pos.y * m_physScale / 2;
