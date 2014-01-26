@@ -12,6 +12,7 @@ package{
 
         override public function create():void{
             var t:FlxText;
+            FlxG.mouse.hide();
             if(times == 1){
                 t = new FlxText(0,FlxG.height/2-10,FlxG.width,"you might have done sex " + times + " time...?");
                 t.size = 16;
@@ -24,7 +25,7 @@ package{
                 add(t);
             }
             if (this.caught) {
-                t.text += " You got caught";
+                t.text += " You got caught.";
             }
             t = new FlxText(FlxG.width/2-50,FlxG.height-20,100,"J to play again");
             t.alignment = "center";
@@ -37,7 +38,6 @@ package{
             super.update();
 
             if(FlxG.keys.J){
-                FlxG.mouse.hide();
                 FlxG.switchState(new MomLeavingState(new PlayState()));
             }
         }

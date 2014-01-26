@@ -3,6 +3,7 @@ package{
 
     public class MenuState extends FlxState{
         override public function create():void{
+            FlxG.mouse.hide();
             var t:FlxText;
             t = new FlxText(0,FlxG.height/2-10,FlxG.width,"ggj");
             t.size = 16;
@@ -19,7 +20,6 @@ package{
             super.update();
 
             if(FlxG.keys.J){
-                FlxG.mouse.hide();
                 FlxG.switchState(new MomLeavingState(new PlayState()));
             }
         }
