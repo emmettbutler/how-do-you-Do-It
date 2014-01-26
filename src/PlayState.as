@@ -27,6 +27,7 @@ package
         static public var mouseYWorld:Number;
 
         public var thinking:ScrollingText;
+        public var face:Face;
 
         public var debugText:FlxText;
 
@@ -37,6 +38,9 @@ package
 
             FlxG.mouse.show();
             setupWorld();
+
+            face = new Face(60, 30);
+            add(face);
 
             thinking = new ScrollingText();
             add(thinking);
@@ -83,6 +87,8 @@ package
             dollR.update();
             dollLGrabber.update();
             dollRGrabber.update();
+
+            face.update();
         }
 
         override public function endCallback():void

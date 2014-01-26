@@ -20,7 +20,7 @@ package
         {
             this.doll1 = doll1;
             this.doll2 = doll2;
-            t = new FlxText(100,100,100,"#");
+            t = new FlxText(100,100,100,"");
             FlxG.state.add(t);
         }
 
@@ -82,11 +82,11 @@ package
             var b:Number = Math.abs(doll1.doll.midriff.GetPosition().y - doll2.doll.midriff.GetPosition().x);
             //c = sqrt(a^2+b^2)
             var distance:Number = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
-            t.text = distance.toString();
+            //t.text = distance.toString();
 
             if(distance < 10){
-                dollTranslateSpeed = 1;
-                dollRotateSpeed = 1;
+                dollTranslateSpeed = .5;
+                dollRotateSpeed = .5;
             } else {
                 dollTranslateSpeed = .1;
                 dollRotateSpeed = .1;
