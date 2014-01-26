@@ -149,14 +149,20 @@ package
             box = new b2PolygonShape();
             box.SetAsBox(56 / m_physScale, 6.5 / m_physScale);
             fixtureDef.shape = box;
-            bd.position.Set((startX - 90) / m_physScale, (startY + 10) / m_physScale);
+            var armSpace:Number = 90;
+            var armHeight:Number = 10;
+            if (spriteType == ATYPE) {
+                armSpace = 70;
+                armHeight = 15;
+            }
+            bd.position.Set((startX - armSpace) / m_physScale, (startY + armHeight) / m_physScale);
             upperArmL = m_world.CreateBody(bd);
             upperArmL.CreateFixture(fixtureDef);
             // R
             box = new b2PolygonShape();
             box.SetAsBox(56 / m_physScale, 6.5 / m_physScale);
             fixtureDef.shape = box;
-            bd.position.Set((startX + 90) / m_physScale, (startY + 10) / m_physScale);
+            bd.position.Set((startX + armSpace) / m_physScale, (startY + armHeight) / m_physScale);
             upperArmR = m_world.CreateBody(bd);
             upperArmR.CreateFixture(fixtureDef);
 
@@ -222,14 +228,18 @@ package
 
             // Upper arm to shoulders
             // L
+            var shoulderJointSpace:Number = 32;
+            if (spriteType == ATYPE) {
+                shoulderJointSpace = 22;
+            }
             jd.lowerAngle = -85 / (180/Math.PI);
             jd.upperAngle = 10 / (180/Math.PI);
-            jd.Initialize(torso1, upperArmL, new b2Vec2((startX - 32) / m_physScale, (startY + 10) / m_physScale));
+            jd.Initialize(torso1, upperArmL, new b2Vec2((startX - shoulderJointSpace) / m_physScale, (startY + 10) / m_physScale));
             m_world.CreateJoint(jd);
             // R
             jd.lowerAngle = -10 / (180/Math.PI);
             jd.upperAngle = 85 / (180/Math.PI);
-            jd.Initialize(torso1, upperArmR, new b2Vec2((startX + 32) / m_physScale, (startY + 10) / m_physScale));
+            jd.Initialize(torso1, upperArmR, new b2Vec2((startX + shoulderJointSpace) / m_physScale, (startY + 10) / m_physScale));
             m_world.CreateJoint(jd);
 
             // Shoulders/stomach
@@ -329,8 +339,8 @@ package
                 headSprite.loadGraphic(ImgFHead, true, true, 35, 40, true);
                 chestSprite.loadGraphic(ImgFChest, true, true, 29, 40, true);
                 hipsSprite.loadGraphic(ImgFHips, true, true, 28, 24, true);
-                armLSprite.loadGraphic(ImgFArmL, true, true, 55, 26, true);
-                armRSprite.loadGraphic(ImgFArmR, true, true, 55, 26, true);
+                armLSprite.loadGraphic(ImgFArmL, true, true, 55, 44, true);
+                armRSprite.loadGraphic(ImgFArmR, true, true, 55, 44, true);
                 legLSprite.loadGraphic(ImgFLegL, true, true, 19, 84, true);
                 legRSprite.loadGraphic(ImgFLegR, true, true, 19, 84, true);
                 footLSprite.loadGraphic(ImgFFootL, true, true, 9, 17, true);
@@ -350,9 +360,9 @@ package
             FlxG.state.add(armRSprite);
             FlxG.state.add(footLSprite);
             FlxG.state.add(footRSprite);
+            FlxG.state.add(hipsSprite);
             FlxG.state.add(legLSprite);
             FlxG.state.add(legRSprite);
-            FlxG.state.add(hipsSprite);
             FlxG.state.add(chestSprite);
             FlxG.state.add(headSprite);
         }
