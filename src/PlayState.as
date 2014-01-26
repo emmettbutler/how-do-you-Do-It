@@ -122,7 +122,7 @@ package
 
         override public function endCallback():void
         {
-            FlxG.switchState(new EndState(dollCollision.sex));
+            FlxG.switchState(new EndState(dollCollision.sex, dollCollision.isColliding));
         }
 
         public function UpdateMouseWorld():void{

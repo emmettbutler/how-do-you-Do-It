@@ -14,6 +14,7 @@ package
         public var t:FlxText = new FlxText(200,200,100,"COLLIDING");
         public var face:Face;
         public var sex:Number = 0;
+        public var isColliding:Boolean = false;
 
         public function DollContactListener(face:Face):void{
             this.face = face;
@@ -25,6 +26,7 @@ package
             var bodyB:b2Fixture = contact.GetFixtureB();
 
             if(bodyA.IsSensor() && bodyB.IsSensor()){
+                this.isColliding = true;
                 this.face.increaseBlush();
                 //A HEAD TO B HEAD
                 if(bodyA.GetUserData().toString() == PhysicsDoll.COL_HEAD){
@@ -108,6 +110,7 @@ package
 
             if(bodyA.IsSensor() && bodyB.IsSensor()){
                 sex++;
+                this.isColliding = false;
             }
         }
     }
