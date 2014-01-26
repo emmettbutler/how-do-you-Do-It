@@ -52,9 +52,6 @@ package
             face = new Face(60, 2);
             add(face);
 
-            lArm = new Arm(50, false);
-            rArm = new Arm(220, true);
-
             thinking = new ScrollingText();
             add(thinking);
 
@@ -65,10 +62,15 @@ package
             worldAABB.lowerBound.Set(0, 0);
             worldAABB.upperBound.Set(640 / m_physScale, 480 / m_physScale);
 
+            dollRGrabber = new DollGrabber();
+            dollLGrabber = new DollGrabber();
+
+            lArm = new Arm(50, dollLGrabber, false);
+            rArm = new Arm(220, dollRGrabber, true);
+
             var position:FlxPoint = new FlxPoint(startX, startY);
             dollL = new PhysicsDoll();
             dollL.create(m_world, position, PhysicsDoll.ATYPE);
-            dollLGrabber = new DollGrabber();
             dollLGrabber.create(dollL, m_world, worldAABB);
 
             //setup collision listener
@@ -79,7 +81,6 @@ package
             position = new FlxPoint(startX, startY);
             dollR = new PhysicsDoll();
             dollR.create(m_world, position, PhysicsDoll.BTYPE);
-            dollRGrabber = new DollGrabber();
             dollRGrabber.create(dollR, m_world, worldAABB);
 
             dollController = new DollController(dollRGrabber, dollLGrabber);
@@ -100,6 +101,9 @@ package
             dollR.update();
             dollLGrabber.update();
             dollRGrabber.update();
+
+            lArm.update();
+            rArm.update();
 
             face.update();
         }

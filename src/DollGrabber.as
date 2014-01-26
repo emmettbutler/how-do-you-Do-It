@@ -13,6 +13,7 @@ package
         public var m_mouseJoint:b2MouseJoint;
         public var doll:PhysicsDoll;
         public var worldBounds:b2AABB;
+        public var pos:b2Vec2;
 
         public function create(doll:PhysicsDoll, m_world:b2World,
                                bounds:b2AABB):void
@@ -43,6 +44,7 @@ package
                 if ((m_mouseJoint.GetTarget().x < midpoint && target.x < midpoint)
                     || (m_mouseJoint.GetTarget().x > midpoint && target.x > midpoint)) {
                     m_mouseJoint.SetTarget(target);
+                    this.pos = target;
                 }
             }
             doll.midriff.SetAngle(angle);
