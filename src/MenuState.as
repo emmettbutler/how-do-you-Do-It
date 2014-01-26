@@ -2,18 +2,19 @@ package{
     import org.flixel.*;
 
     public class MenuState extends FlxState{
+        [Embed(source="../assets/title_screen.png")] private var ImgBG:Class;
+
         override public function create():void{
             FlxG.mouse.hide();
+            var bg:FlxSprite = new FlxSprite(0, 0);
+            bg.loadGraphic(ImgBG, true, true, 320, 240, true);
+            add(bg);
+
             var t:FlxText;
-            t = new FlxText(0,FlxG.height/2-10,FlxG.width,"ggj");
-            t.size = 16;
-            t.alignment = "center";
-            add(t);
-            t = new FlxText(FlxG.width/2-50,FlxG.height-20,100,"J to play");
+            t = new FlxText(FlxG.width-80,FlxG.height/2+20,100,"J to play");
             t.alignment = "center";
             add(t);
 
-            FlxG.mouse.show();
         }
 
         override public function update():void{
