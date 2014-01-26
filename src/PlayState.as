@@ -79,7 +79,7 @@ package
             dollLGrabber.create(dollL, m_world, worldAABB);
 
             //setup collision listener
-            dollCollision = new DollContactListener();
+            dollCollision = new DollContactListener(face);
             m_world.SetContactListener(dollCollision);
 
             startX = 510;
