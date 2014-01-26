@@ -18,7 +18,7 @@ package{
                 t.alignment = "center";
                 add(t);
             } else {
-                t = new FlxText(0,FlxG.height/2-10,FlxG.width,"you might done sex " + times + " times...?");
+                t = new FlxText(0,FlxG.height/2-10,FlxG.width,"you might have done sex " + times + " times...?");
                 t.size = 16;
                 t.alignment = "center";
                 add(t);
