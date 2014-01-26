@@ -17,7 +17,7 @@ package
 
         override public function create():void
         {
-            endTime = 10;
+            endTime = 1;
 
             if(FlxG.music == null){
                 FlxG.playMusic(SndBGM, ggj.VOLUME);
