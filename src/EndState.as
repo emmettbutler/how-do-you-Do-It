@@ -38,7 +38,7 @@ package{
 
             if(FlxG.mouse.justPressed()){
                 FlxG.mouse.hide();
-                FlxG.switchState(new SceneState("I'll be back in a minute.", new SceneState("OMG what's sex", new PlayState())));
+                FlxG.switchState(new MomLeavingState(new PlayState()));
             }
         }
     }
