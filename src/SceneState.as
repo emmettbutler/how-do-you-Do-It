@@ -3,6 +3,8 @@ package
     import org.flixel.*;
 
     public class SceneState extends TimedState{
+        [Embed(source = "../assets/bgm.mp3")] private var SndBGM:Class;
+
         public var _text:String;
         public var nextState:FlxState;
 
@@ -21,6 +23,15 @@ package
             t.size = 16;
             t.alignment = "center";
             add(t);
+
+            if(FlxG.music == null){
+                FlxG.playMusic(SndBGM);
+            } else {
+                FlxG.music.resume();
+                if(!FlxG.music.active){
+                    FlxG.playMusic(SndBGM);
+                }
+            }
         }
 
         override public function update():void

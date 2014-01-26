@@ -90,6 +90,15 @@ package
             dollRGrabber.create(dollR, m_world, worldAABB);
 
             dollController = new DollController(dollRGrabber, dollLGrabber, rArm, lArm);
+
+            if(FlxG.music == null){
+                FlxG.playMusic(SndBGM);
+            } else {
+                FlxG.music.resume();
+                if(!FlxG.music.active){
+                    FlxG.playMusic(SndBGM);
+                }
+            }
         }
 
         override public function update():void
