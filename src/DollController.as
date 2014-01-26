@@ -14,11 +14,14 @@ package
         public var doll2:DollGrabber;
         static public var dollTranslateSpeed:Number = .1;
         static public var dollRotateSpeed:Number = .1;
+        public var t:FlxText;
 
         public function DollController(doll1:DollGrabber, doll2:DollGrabber)
         {
             this.doll1 = doll1;
             this.doll2 = doll2;
+            t = new FlxText(100,100,100,"#");
+            FlxG.state.add(t);
         }
 
         public function update():void
@@ -62,15 +65,32 @@ package
             }
             if (up) {
                 target1.y -= dollTranslateSpeed;
-                target2.y += dollTranslateSpeed;
+                target2.y -= dollTranslateSpeed;
             }
             if (down) {
                 target1.y += dollTranslateSpeed;
-                target2.y -= dollTranslateSpeed;
+                target2.y += dollTranslateSpeed;
             }
 
             doll1.SetTransform(target1, angle1);
             doll2.SetTransform(target2, angle2);
+            dollProximity();
+        }
+
+        public function dollProximity():void{
+            var a:Number = Math.abs(doll1.doll.midriff.GetPosition().x - doll2.doll.midriff.GetPosition().y);
+            var b:Number = Math.abs(doll1.doll.midriff.GetPosition().y - doll2.doll.midriff.GetPosition().x);
+            //c = sqrt(a^2+b^2)
+            var distance:Number = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
+            t.text = distance.toString();
+
+            if(distance < 10){
+                dollTranslateSpeed = 1;
+                dollRotateSpeed = 1;
+            } else {
+                dollTranslateSpeed = .1;
+                dollRotateSpeed = .1;
+            }
         }
     }
 }

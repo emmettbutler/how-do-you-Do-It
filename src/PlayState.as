@@ -17,10 +17,10 @@ package
         public var m_mouseJoint:b2MouseJoint;
         public var dollLGrabber:DollGrabber;
         public var dollRGrabber:DollGrabber;
-        public var dollController:DollController;
-        public var dollCollision:DollContactListener;
         public var dollL:PhysicsDoll;
         public var dollR:PhysicsDoll;
+        public var dollController:DollController;
+        public var dollCollision:DollContactListener;
         static public var mouseXWorldPhys:Number;
         static public var mouseYWorldPhys:Number;
         static public var mouseXWorld:Number;

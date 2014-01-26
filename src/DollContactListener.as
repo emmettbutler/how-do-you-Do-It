@@ -12,6 +12,9 @@ package
     public class DollContactListener extends b2ContactListener
     {
 
+        public function DollContactListener():void{
+        }
+
         override public function BeginContact(contact:b2Contact):void
         {
             var bodyA:b2Fixture = contact.GetFixtureA();
@@ -24,8 +27,6 @@ package
 
         public function onCollision():void
         {
-            //do stuff
         }
-
     }
 }
