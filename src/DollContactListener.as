@@ -11,6 +11,14 @@ package
 
     public class DollContactListener extends b2ContactListener
     {
+        [Embed(source = "../assets/toy1.mp3")] private var SndToy1:Class;
+        [Embed(source = "../assets/toy2.mp3")] private var SndToy2:Class;
+        [Embed(source = "../assets/toy3.mp3")] private var SndToy3:Class;
+        [Embed(source = "../assets/toy4.mp3")] private var SndToy4:Class;
+        [Embed(source = "../assets/toy5.mp3")] private var SndToy5:Class;
+        [Embed(source = "../assets/toy6.mp3")] private var SndToy6:Class;
+        [Embed(source = "../assets/toy7.mp3")] private var SndToy7:Class;
+
         public var t:FlxText = new FlxText(200,200,100,"COLLIDING");
         public var face:Face;
         public var sex:Number = 0;
@@ -99,6 +107,22 @@ package
                     if(bodyA.GetUserData().toString() == PhysicsDoll.COL_R_HAND){
                         this.face.play("surprised");
                     }
+                }
+                var pick:Number = FlxG.random()*12;
+                if (pick < 1) {
+                    FlxG.play(SndToy1);
+                } else if (pick < 2) {
+                    FlxG.play(SndToy2);
+                } else if (pick < 3) {
+                    FlxG.play(SndToy3);
+                } else if (pick < 4) {
+                    FlxG.play(SndToy4);
+                } else if (pick < 5) {
+                    FlxG.play(SndToy5);
+                } else if (pick < 6) {
+                    FlxG.play(SndToy6);
+                } else if (pick < 7) {
+                    FlxG.play(SndToy7);
                 }
             }
         }
