@@ -9,6 +9,22 @@ package
         [Embed(source = "../assets/garageopen.mp3")] private var garageOpen:Class;
         [Embed(source = "../assets/cardoor.mp3")] private var carDoor:Class;
         [Embed(source = "../assets/carleave.mp3")] private var carLeave:Class;
+        [Embed(source = "../assets/mom1.png")] private var mom:Class;
+        [Embed(source = "../assets/house.png")] private var house:Class;
+        [Embed(source = "../assets/girl1.png")] private var girl1:Class;
+        [Embed(source = "../assets/girl2.png")] private var girl2:Class;
+        [Embed(source = "../assets/girl3.png")] private var girl3:Class;
+        [Embed(source = "../assets/car.png")] private var car:Class;
+        [Embed(source = "../assets/outside.png")] private var outside:Class;
+        public var mom_sprite:FlxSprite;
+        public var girl1_sprite:FlxSprite;
+        public var scene_time:Number = 3;
+        public var current_scene:Number = 1;
+        public var cameraTrack:FlxSprite;
+        public var cam_moving:Boolean = false;
+        public var cam_target_point:FlxPoint;
+        public var car_sprite:FlxSprite;
+        public var girl2_sprite:FlxSprite;
 
         public var nextState:FlxState;
         public var time_frame:Number = 0;
@@ -21,6 +37,42 @@ package
         override public function create():void
         {
             endTime = 1;
+
+            cam_target_point = new FlxPoint(FlxG.width/2,FlxG.height/2);
+
+            cameraTrack = new FlxSprite(FlxG.width/2,FlxG.height/2);
+            cameraTrack.visible = false;
+            add(cameraTrack);
+            FlxG.camera.target = cameraTrack;
+
+            var outside_bg:FlxSprite = new FlxSprite(0, 0);
+            outside_bg.loadGraphic(outside, true, true, 600, 185, true);
+            add(outside_bg);
+
+            var house_bg:FlxSprite = new FlxSprite(0, 0);
+            house_bg.loadGraphic(house, true, true, 1500/2, 360, true);
+            house_bg.addAnimation("closed", [0], 1, false);
+            house_bg.addAnimation("open", [1], 1, false);
+            add(house_bg);
+
+            mom_sprite = new FlxSprite(22, 49);
+            mom_sprite.loadGraphic(mom, true, true, 77, 151, true);
+            add(mom_sprite);
+
+            girl1_sprite = new FlxSprite(110, 98);
+            girl1_sprite.loadGraphic(girl1, true, true, 44, 121, true);
+            add(girl1_sprite);
+
+            car_sprite = new FlxSprite(140, 77);
+            car_sprite.loadGraphic(car, true, true, 104, 54, true);
+            car_sprite.alpha = 0;
+            add(car_sprite);
+
+            girl2_sprite = new FlxSprite(293, 82);
+            girl2_sprite.loadGraphic(girl2, true, true, 216/4, 99, true);
+            girl2_sprite.addAnimation("run", [0,1,2,3], 10, false);
+            girl2_sprite.alpha = 0;
+            add(girl2_sprite);
 
             if(FlxG.music == null){
                 FlxG.playMusic(SndBGM, ggj.VOLUME);
@@ -46,6 +98,42 @@ package
                 FlxG.play(carDoor);
             } else if(time_frame == 400){
                 FlxG.play(carLeave);
+            }
+
+            if((timeFrame/100)%3 == 0){
+                current_scene++;
+                if(current_scene == 2){
+                    cam_moving = true;
+                    cam_target_point = new FlxPoint(176+(FlxG.width/2),FlxG.height/2);
+                }
+                if(current_scene == 3){
+
+                }
+            }
+
+            if(Math.abs(cameraTrack.x - cam_target_point.x) < 10 && Math.abs(cameraTrack.y - cam_target_point.y) < 10){
+                cam_moving = false;
+                if(current_scene == 2){
+                    car_sprite.alpha += .02;
+                    girl2_sprite.alpha += .02;
+                    if(girl2_sprite.alpha >= 1){
+                        girl2_sprite.play("run");
+                    }
+                }
+                if(current_scene == 3){
+
+                }
+            } else {
+                cameraTrack.velocity.x = cam_target_point.x - cameraTrack.x;
+                cameraTrack.velocity.y = cam_target_point.y - cameraTrack.y;
+            }
+
+            if(current_scene == 2){
+                girl1_sprite.alpha -= .02;
+                mom_sprite.alpha -= .02;
+            }
+            if(current_scene == 3){
+
             }
         }
 
