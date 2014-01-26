@@ -22,31 +22,27 @@ package {
             "Why doesn't she like it?",
             "Why doesn't she like... sex?",
             "I wish I knew what sex was.");
-        public var spacing:String = "                               ";
         public var thought_bubble:String = "";
         public var bubble_width:Number = FlxG.width/2;
-        public var pos_x:Number = bubble_width;
-        public var pos_y:Number = FlxG.height-20;
+        public var pos_x:Number = FlxG.width-100;
+        public var pos_y:Number = 20;
         public var counter:Number = 0;
-        public var edge:Number = bubble_width;
+        public var frame_counter:Number = 0;
 
         public function ScrollingText() {
-            for(var i:Number = 0; i < thoughts.length; i++){
-                thought_bubble += thoughts[i] + spacing;
-            }
-
-            super(pos_x,pos_y,thought_bubble.length+9999,thought_bubble);
+            super(pos_x,pos_y,100,thoughts[counter]);
         }
 
         override public function update():void{
             super.update();
-            pos_x -= .5;
+            frame_counter++;
 
-            this.x = pos_x;
-            this.y = pos_y;
-
-            if(this.x + thought_bubble.length < 0){
-                this.kill();
+            if(frame_counter%400 == 0){
+                counter++;
+                if(counter >= thoughts.length){
+                    counter = 0;
+                }
+                this.text = thoughts[counter];
             }
         }
     }
