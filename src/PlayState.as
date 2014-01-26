@@ -40,9 +40,14 @@ package
         public var rArm:Arm;
 
         public var debugText:FlxText;
+        public var started:Boolean;
+        public var smoke:FlxSprite;
+        public var howText:FlxText;
 
         override public function create():void
         {
+            started = false;
+
             var bg:FlxSprite = new FlxSprite(0, 0);
             bg.loadGraphic(ImgBG, true, true, 320, 240, true);
             add(bg);
@@ -91,6 +96,14 @@ package
 
             dollController = new DollController(dollRGrabber, dollLGrabber, rArm, lArm);
 
+            smoke = new FlxSprite(0, 0);
+            smoke.makeGraphic(640, 480);
+            smoke.fill(0x55000000);
+            add(smoke);
+
+            howText = new FlxText(10, FlxG.height/2, FlxG.width, "WASDQE to play");
+            add(howText);
+
             if(FlxG.music == null){
                 FlxG.playMusic(SndBGM, ggj.VOLUME);
             } else {
@@ -105,13 +118,24 @@ package
         {
             super.update();
 
+            if(timeFrame%100 == 0 && !started){
+                endTime++;
+            }
+
+            started = dollController.update(endTime - timeSec);
+
+            if (started) {
+                thinking.paused = false;
+                FlxG.state.remove(smoke);
+                FlxG.state.remove(howText);
+            }
+
             UpdateMouseWorld()
             MouseDrag();
 
             m_world.Step(1.0/30.0, 10, 10);
             //m_world.DrawDebugData();
 
-            dollController.update(endTime - timeSec);
             dollL.update();
             dollR.update();
             dollLGrabber.update();

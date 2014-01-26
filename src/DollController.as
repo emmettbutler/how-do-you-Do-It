@@ -38,7 +38,7 @@ package
             FlxG.state.add(t);
         }
 
-        public function update(timeRemain:Number):void
+        public function update(timeRemain:Number):Boolean
         {
             timeFrame++;
 
@@ -50,6 +50,8 @@ package
             if (timeRemain < 2) {
                 toss = true;
             }
+
+            var ret:Boolean = false;
 
             var distance:Number = dollProximity(toss);
 
@@ -71,19 +73,24 @@ package
             if (FlxG.keys.D || (toss && distance > 7.5)) {
                 right = true;
                 left = false;
+                ret = true;
             } else if (FlxG.keys.A) {
                 right = false;
                 left = true;
+                ret = true;
             }
             if (FlxG.keys.S) {
                 up = false;
                 down = true;
+                ret = true;
             } else if (FlxG.keys.W) {
                 up = true;
                 down = false;
+                ret = true;
             }
 
             if (FlxG.keys.E) {
+                ret = true;
                 if (rotateMirror) {
                     angle1 += dollRotateSpeed;
                     arm1.turn(true);
@@ -92,6 +99,7 @@ package
                     arm2.turn(false);
                 }
             } else if (FlxG.keys.Q) {
+                ret = true;
                 if (rotateMirror) {
                     angle2 -= dollRotateSpeed;
                     arm2.turn(false);
@@ -127,6 +135,7 @@ package
 
             doll1.SetTransform(target1, angle1, toss);
             doll2.SetTransform(target2, angle2, toss);
+            return ret;
         }
 
         public function dollProximity(toss:Boolean):Number{

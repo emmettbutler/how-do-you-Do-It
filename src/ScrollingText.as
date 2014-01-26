@@ -33,6 +33,7 @@ package {
         public var pos_y:Number = 20;
         public var counter:Number = 0;
         public var frame_counter:Number = 0;
+        public var paused:Boolean = true;
 
         public function ScrollingText() {
             super(pos_x,pos_y,100,thoughts[counter]);
@@ -42,7 +43,7 @@ package {
             super.update();
             frame_counter++;
 
-            if(frame_counter%150 == 0){
+            if(frame_counter%150 == 0 && !paused){
                 counter++;
                 if(counter >= thoughts.length){
                     counter = 0;
