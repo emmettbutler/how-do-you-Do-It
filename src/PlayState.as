@@ -13,6 +13,7 @@ package
     public class PlayState extends TimedState
     {
         [Embed(source = "../assets/bgm.mp3")] private var SndBGM:Class;
+        [Embed(source="../assets/girl_body.png")] private var ImgBody:Class;
 
         public var m_physScale:Number = 30
         public var m_world:b2World;
@@ -30,6 +31,7 @@ package
 
         public var thinking:ScrollingText;
         public var face:Face;
+        public var body:FlxSprite;
 
         public var debugText:FlxText;
 
@@ -41,7 +43,11 @@ package
             FlxG.mouse.show();
             setupWorld();
 
-            face = new Face(60, 30);
+            body = new FlxSprite(0, 126);
+            body.loadGraphic(ImgBody, true, true, 294, 190, true);
+            add(body);
+
+            face = new Face(60, 2);
             add(face);
 
             thinking = new ScrollingText();
