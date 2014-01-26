@@ -46,7 +46,8 @@ package
         public var debugText:FlxText;
         public var started:Boolean;
         public var smoke:FlxSprite;
-        public var howText:FlxText;
+        public var howText1:FlxText;
+        public var howText2:FlxText;
 
         override public function create():void
         {
@@ -105,8 +106,12 @@ package
             smoke.fill(0x55000000);
             add(smoke);
 
-            howText = new FlxText(10, FlxG.height/2, FlxG.width, "JK WASD to play");
-            add(howText);
+            howText1 = new FlxText(FlxG.width-200, FlxG.height/2, FlxG.width, "Use WASD to move your arms.");
+            //howText1.size = 14;
+            howText2 = new FlxText(FlxG.width-200, FlxG.height/2+20, FlxG.width, "Use J or K to rotate a doll.");
+            //howText2.size = 14;
+            add(howText1);
+            add(howText2);
 
             if(FlxG.music == null){
                 FlxG.playMusic(SndBGM, ggj.VOLUME);
@@ -133,7 +138,8 @@ package
             if (started) {
                 thinking.paused = false;
                 FlxG.state.remove(smoke);
-                FlxG.state.remove(howText);
+                FlxG.state.remove(howText1);
+                FlxG.state.remove(howText2);
             }
 
             UpdateMouseWorld()
