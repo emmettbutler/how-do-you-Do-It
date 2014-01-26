@@ -13,6 +13,10 @@ package
             addAnimation("neutral", [0], 1, false);
             addAnimation("blink", [2, 3, 2, 0], 12, false);
             addAnimation("lookaside", [1, 0], 2, false);
+            addAnimation("excited", [4]);
+            addAnimation("disgusted", [5]);
+            addAnimation("confused", [6]);
+            addAnimation("surprised", [7]);
             play("neutral");
         }
 
