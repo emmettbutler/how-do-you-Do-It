@@ -12,6 +12,8 @@ package
 
     public class PlayState extends TimedState
     {
+        [Embed(source = "../assets/bgm.mp3")] private var SndBGM:Class;
+
         public var m_physScale:Number = 30
         public var m_world:b2World;
         public var m_mouseJoint:b2MouseJoint;
