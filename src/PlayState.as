@@ -15,6 +15,10 @@ package
         [Embed(source = "../assets/bgm.mp3")] private var SndBGM:Class;
         [Embed(source="../assets/girl_body.png")] private var ImgBody:Class;
         [Embed(source="../assets/mainbg.png")] private var ImgBG:Class;
+        [Embed(source = "../assets/garageopen.mp3")] private var garageOpen:Class;
+        [Embed(source = "../assets/cardoor.mp3")] private var carDoor:Class;
+        [Embed(source = "../assets/cararrive.mp3")] private var carArrive:Class;
+        [Embed(source = "../assets/dooropen.mp3")] private var doorOpen:Class;
 
         public var m_physScale:Number = 30
         public var m_world:b2World;
@@ -151,11 +155,21 @@ package
                 thinking_two = new ScrollingText();
                 add(thinking_two);
             }*/
+
+            if(this.timeFrame == 20*100){
+                FlxG.play(carArrive);
+            } else if(this.timeFrame == 22*100){
+                FlxG.play(garageOpen);
+            } else if(this.timeFrame == 25*100){
+                FlxG.play(carDoor);
+            } else if(this.timeFrame == 29*100){
+                FlxG.play(doorOpen);
+            }
         }
 
         override public function endCallback():void
         {
-            FlxG.switchState(new EndState(dollCollision.sex, dollController.isClose));
+            FlxG.switchState(new MomReturningState(new EndState(dollCollision.sex, dollController.isClose)));
         }
 
         public function UpdateMouseWorld():void{
