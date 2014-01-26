@@ -147,16 +147,16 @@ package
             fixtureDef.filter = filterData;
             // L
             box = new b2PolygonShape();
-            box.SetAsBox(36 / m_physScale, 6.5 / m_physScale);
+            box.SetAsBox(56 / m_physScale, 6.5 / m_physScale);
             fixtureDef.shape = box;
-            bd.position.Set((startX - 68) / m_physScale, (startY + 10) / m_physScale);
+            bd.position.Set((startX - 90) / m_physScale, (startY + 10) / m_physScale);
             upperArmL = m_world.CreateBody(bd);
             upperArmL.CreateFixture(fixtureDef);
             // R
             box = new b2PolygonShape();
-            box.SetAsBox(36 / m_physScale, 6.5 / m_physScale);
+            box.SetAsBox(56 / m_physScale, 6.5 / m_physScale);
             fixtureDef.shape = box;
-            bd.position.Set((startX + 68) / m_physScale, (startY + 10) / m_physScale);
+            bd.position.Set((startX + 90) / m_physScale, (startY + 10) / m_physScale);
             upperArmR = m_world.CreateBody(bd);
             upperArmR.CreateFixture(fixtureDef);
 
@@ -174,16 +174,16 @@ package
             fixtureDef.filter = filterData;
             // L
             box = new b2PolygonShape();
-            box.SetAsBox(7.5 / m_physScale, 44 / m_physScale);
+            box.SetAsBox(7.5 / m_physScale, 66 / m_physScale);
             fixtureDef.shape = box;
-            bd.position.Set((startX - LEGSPACING) / m_physScale, (startY + 150) / m_physScale);
+            bd.position.Set((startX - LEGSPACING) / m_physScale, (startY + 170) / m_physScale);
             upperLegL = m_world.CreateBody(bd);
             upperLegL.CreateFixture(fixtureDef);
             // R
             box = new b2PolygonShape();
-            box.SetAsBox(7.5 / m_physScale, 44 / m_physScale);
+            box.SetAsBox(7.5 / m_physScale, 66 / m_physScale);
             fixtureDef.shape = box;
-            bd.position.Set((startX + LEGSPACING) / m_physScale, (startY + 150) / m_physScale);
+            bd.position.Set((startX + LEGSPACING) / m_physScale, (startY + 170) / m_physScale);
             upperLegR = m_world.CreateBody(bd);
             upperLegR.CreateFixture(fixtureDef);
 
@@ -199,14 +199,14 @@ package
             box = new b2PolygonShape();
             box.SetAsBox(6 / m_physScale, 10 / m_physScale);
             fixtureDef.shape = box;
-            bd.position.Set((startX - LEGSPACING) / m_physScale, (startY + 202) / m_physScale);
+            bd.position.Set((startX - LEGSPACING) / m_physScale, (startY + 247) / m_physScale);
             lowerLegL = m_world.CreateBody(bd);
             lowerLegL.CreateFixture(fixtureDef);
             // R
             box = new b2PolygonShape();
             box.SetAsBox(6 / m_physScale, 10 / m_physScale);
             fixtureDef.shape = box;
-            bd.position.Set((startX + LEGSPACING) / m_physScale, (startY + 202) / m_physScale);
+            bd.position.Set((startX + LEGSPACING) / m_physScale, (startY + 247) / m_physScale);
             lowerLegR = m_world.CreateBody(bd);
             lowerLegR.CreateFixture(fixtureDef);
 
@@ -215,21 +215,21 @@ package
             jd.enableLimit = true;
 
             // Head to shoulders
-            jd.lowerAngle = -40 / (180/Math.PI);
-            jd.upperAngle = 40 / (180/Math.PI);
+            jd.lowerAngle = -10 / (180/Math.PI);
+            jd.upperAngle = 10 / (180/Math.PI);
             jd.Initialize(torso1, head, new b2Vec2(startX / m_physScale, (startY - 3) / m_physScale));
             m_world.CreateJoint(jd);
 
             // Upper arm to shoulders
             // L
             jd.lowerAngle = -85 / (180/Math.PI);
-            jd.upperAngle = 130 / (180/Math.PI);
-            jd.Initialize(torso1, upperArmL, new b2Vec2((startX - 38) / m_physScale, (startY + 10) / m_physScale));
+            jd.upperAngle = 10 / (180/Math.PI);
+            jd.Initialize(torso1, upperArmL, new b2Vec2((startX - 32) / m_physScale, (startY + 10) / m_physScale));
             m_world.CreateJoint(jd);
             // R
-            jd.lowerAngle = -130 / (180/Math.PI);
+            jd.lowerAngle = -10 / (180/Math.PI);
             jd.upperAngle = 85 / (180/Math.PI);
-            jd.Initialize(torso1, upperArmR, new b2Vec2((startX + 38) / m_physScale, (startY + 10) / m_physScale));
+            jd.Initialize(torso1, upperArmR, new b2Vec2((startX + 32) / m_physScale, (startY + 10) / m_physScale));
             m_world.CreateJoint(jd);
 
             // Shoulders/stomach
@@ -246,26 +246,26 @@ package
 
             // Torso to upper leg
             // L
-            jd.lowerAngle = -25 / (180/Math.PI);
+            jd.lowerAngle = -5 / (180/Math.PI);
             jd.upperAngle = 45 / (180/Math.PI);
-            jd.Initialize(torso2, upperLegL, new b2Vec2((startX - LEGSPACING) / m_physScale, (startY + 102) / m_physScale));
+            jd.Initialize(torso2, upperLegL, new b2Vec2((startX - LEGSPACING) / m_physScale, (startY + 96) / m_physScale));
             m_world.CreateJoint(jd);
             // R
             jd.lowerAngle = -45 / (180/Math.PI);
-            jd.upperAngle = 25 / (180/Math.PI);
-            jd.Initialize(torso2, upperLegR, new b2Vec2((startX + LEGSPACING) / m_physScale, (startY + 102) / m_physScale));
+            jd.upperAngle = 5 / (180/Math.PI);
+            jd.Initialize(torso2, upperLegR, new b2Vec2((startX + LEGSPACING) / m_physScale, (startY + 96) / m_physScale));
             m_world.CreateJoint(jd);
 
             // Upper leg to lower leg
             // L
-            jd.lowerAngle = -25 / (180/Math.PI);
-            jd.upperAngle = 115 / (180/Math.PI);
-            jd.Initialize(upperLegL, lowerLegL, new b2Vec2((startX - LEGSPACING) / m_physScale, (startY + 185) / m_physScale));
+            jd.lowerAngle = 10 / (180/Math.PI);
+            jd.upperAngle = 40 / (180/Math.PI);
+            jd.Initialize(upperLegL, lowerLegL, new b2Vec2((startX - LEGSPACING) / m_physScale, (startY + 235) / m_physScale));
             m_world.CreateJoint(jd);
             // R
-            jd.lowerAngle = -115 / (180/Math.PI);
-            jd.upperAngle = 25 / (180/Math.PI);
-            jd.Initialize(upperLegR, lowerLegR, new b2Vec2((startX + LEGSPACING) / m_physScale, (startY + 185) / m_physScale));
+            jd.lowerAngle = -40 / (180/Math.PI);
+            jd.upperAngle = 10 / (180/Math.PI);
+            jd.Initialize(upperLegR, lowerLegR, new b2Vec2((startX + LEGSPACING) / m_physScale, (startY + 235) / m_physScale));
             m_world.CreateJoint(jd);
 
             setupSprites();
@@ -286,7 +286,11 @@ package
             hipsSprite.angle = midriff.GetAngle() * (180 / Math.PI) ;
 
             armLSprite.x = (upperArmR.GetPosition().x * m_physScale / 2) - armLSprite.width/2;
-            armLSprite.y = (upperArmR.GetPosition().y * m_physScale / 2) - armLSprite.height/2;
+            if (spriteType == ATYPE) {
+                armLSprite.y = (upperArmR.GetPosition().y * m_physScale / 2) - armLSprite.height/2 - 3;
+            } else if (spriteType == BTYPE) {
+                armLSprite.y = (upperArmR.GetPosition().y * m_physScale / 2) - armLSprite.height/2;
+            }
             armLSprite.angle = upperArmR.GetAngle() * (180 / Math.PI) ;
 
             armRSprite.x = (upperArmL.GetPosition().x * m_physScale / 2) - armRSprite.width/2;
