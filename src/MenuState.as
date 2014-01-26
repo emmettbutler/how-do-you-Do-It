@@ -11,10 +11,10 @@ package{
             add(bg);
 
             var t:FlxText;
-            t = new FlxText(FlxG.width-80,FlxG.height/2+20,100,"J to play");
+            t = new FlxText(FlxG.width-85,FlxG.height/2+20,100,"J to play");
             t.alignment = "center";
+            t.color = 0xf9d0b4;
             add(t);
-
         }
 
         override public function update():void{

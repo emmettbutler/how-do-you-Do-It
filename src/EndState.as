@@ -30,8 +30,6 @@ package{
             t = new FlxText(FlxG.width/2-50,FlxG.height-20,100,"J to play again");
             t.alignment = "center";
             add(t);
-
-            FlxG.mouse.show();
         }
 
         override public function update():void{
