@@ -26,6 +26,8 @@ package{
             }
             if (this.caught) {
                 t.text += "\nEep! Mom saw!";
+            } else {
+                t.text += "\nAnd you didn't get caught!";
             }
             t = new FlxText(FlxG.width/2-50,FlxG.height-20,100,"J to play again");
             t.alignment = "center";
