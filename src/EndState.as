@@ -28,7 +28,7 @@ package{
             } else {
                 t.text += "\nAnd you didn't get caught!";
             }
-            t = new FlxText(FlxG.width/2-50,FlxG.height-50,100,"J to play again");
+            t = new FlxText(FlxG.width/2-50,FlxG.height-40,100,"J to play again");
             t.setFormat("Minecraftia-Regular",16,0xffffffff,"center");
             add(t);
         }
