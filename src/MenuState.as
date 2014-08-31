@@ -11,8 +11,8 @@ package{
             add(bg);
 
             var t:FlxText;
-            t = new FlxText(FlxG.width-85,FlxG.height/2+20,100,"J to play");
-            t.alignment = "center";
+            t = new FlxText(-9, FlxG.height/2+20, FlxG.width, "Press any key to play");
+            t.alignment = "right";
             t.color = 0xf9d0b4;
             add(t);
         }
@@ -20,7 +20,7 @@ package{
         override public function update():void{
             super.update();
 
-            if(FlxG.keys.J){
+            if(FlxG.keys.any()){
                 FlxG.switchState(new MomLeavingState(new PlayState()));
             }
         }
