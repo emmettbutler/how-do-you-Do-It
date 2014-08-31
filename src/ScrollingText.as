@@ -3,6 +3,7 @@ package {
 
     public class ScrollingText extends FlxText {
         [Embed(source = "../assets/thoughts.png")] private var bubble:Class;
+        [Embed(source="../assets/Minecraftia2.ttf", fontFamily="Minecraftia-Regular", embedAsCFF="false")] public var FontPix:String;
 
         public var thoughts:Array = new Array(
             "...she's gone.",
@@ -17,7 +18,7 @@ package {
             "What kind of a hug is a hug on the floor?",
             "Like this...?",
             "How many hugs are there?",
-            "There's a lot about hugging I don't understand.",
+            "There's a lot about hugging I don't know.",
             "I hope she doesn't see this...",
             "They kissed too...",
             "Kissing seems nice.",
@@ -31,7 +32,7 @@ package {
         public var thought_bubble:String = "";
         public var bubble_width:Number = FlxG.width/2;
         public var pos_x:Number = FlxG.width-105;
-        public var pos_y:Number = 25;
+        public var pos_y:Number = 15;
         public var counter:Number = 0;
         public var frame_counter:Number = 0;
         public var paused:Boolean = true;
@@ -39,7 +40,8 @@ package {
         public var c1:Number = 0;
 
         public function ScrollingText() {
-            super(pos_x,pos_y,90,thoughts[counter]);
+            super(pos_x,pos_y,90, thoughts[counter]);
+            this.setFormat("Minecraftia-Regular",8,0xff000000,"left");
             thought_img = new FlxSprite(178, 3);
             thought_img.loadGraphic(bubble, true, true, 420/3, 114, true);
             thought_img.addAnimation("mid", [1], 12, false);

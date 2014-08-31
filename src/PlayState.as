@@ -19,6 +19,7 @@ package
         [Embed(source = "../assets/cardoor.mp3")] private var carDoor:Class;
         [Embed(source = "../assets/cararrive.mp3")] private var carArrive:Class;
         [Embed(source = "../assets/dooropen.mp3")] private var doorOpen:Class;
+        [Embed(source="../assets/Minecraftia2.ttf", fontFamily="Minecraftia-Regular", embedAsCFF="false")] public var FontPix:String;
 
         public var m_physScale:Number = 30
         public var m_world:b2World;
@@ -107,8 +108,10 @@ package
             add(smoke);
 
             howText1 = new FlxText(FlxG.width-200, FlxG.height/2, FlxG.width, "Use WASD to move your arms.");
+            howText1.setFormat("Minecraftia-Regular",8,0xffffffff,"left");
             //howText1.size = 14;
             howText2 = new FlxText(FlxG.width-200, FlxG.height/2+20, FlxG.width, "Use J or K to rotate a doll.");
+            howText2.setFormat("Minecraftia-Regular",8,0xffffffff,"left");
             //howText2.size = 14;
             add(howText1);
             add(howText2);

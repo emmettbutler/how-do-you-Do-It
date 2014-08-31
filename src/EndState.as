@@ -13,15 +13,14 @@ package{
         override public function create():void{
             var t:FlxText;
             FlxG.mouse.hide();
+            var textWidth:Number = FlxG.width;
             if(times == 1){
-                t = new FlxText(0,FlxG.height/2-10,FlxG.width,"you might have done sex " + times + " time...?");
-                t.size = 16;
-                t.alignment = "center";
+                t = new FlxText(0,FlxG.height/2-50, textWidth,"You might have done sex\n" + times + " time...?");
+                t.setFormat("Minecraftia-Regular",16,0xffffffff,"center");
                 add(t);
             } else {
-                t = new FlxText(0,FlxG.height/2-10,FlxG.width,"You might have done sex " + times + " times...?");
-                t.size = 16;
-                t.alignment = "center";
+                t = new FlxText(0,FlxG.height/2-50, textWidth,"You might have done sex\n" + times + " times...?");
+                t.setFormat("Minecraftia-Regular",16,0xffffffff,"center");
                 add(t);
             }
             if (this.caught) {
@@ -29,8 +28,8 @@ package{
             } else {
                 t.text += "\nAnd you didn't get caught!";
             }
-            t = new FlxText(FlxG.width/2-50,FlxG.height-20,100,"J to play again");
-            t.alignment = "center";
+            t = new FlxText(FlxG.width/2-50,FlxG.height-50,100,"J to play again");
+            t.setFormat("Minecraftia-Regular",16,0xffffffff,"center");
             add(t);
         }
 
