@@ -28,7 +28,7 @@ package{
             } else {
                 t.text += "\nAnd you didn't get caught!";
             }
-            t = new FlxText(FlxG.width/2-50,FlxG.height-40,100,"J to play again");
+            t = new FlxText(0,FlxG.height-40,FlxG.width,"Press any key to play again");
             t.setFormat("Minecraftia-Regular",16,0xffffffff,"center");
             add(t);
         }
@@ -36,7 +36,7 @@ package{
         override public function update():void{
             super.update();
 
-            if(FlxG.keys.J){
+            if(FlxG.keys.any()){
                 FlxG.switchState(new MomLeavingState(new PlayState()));
             }
         }
