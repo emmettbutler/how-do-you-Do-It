@@ -14,7 +14,7 @@ package{
             t = new FlxText(-9, FlxG.height/2+20, FlxG.width, "Press any key to play");
             t.alignment = "right";
             t.color = 0xf9d0b4;
-            add(t);
+            //add(t);
         }
 
         override public function update():void{

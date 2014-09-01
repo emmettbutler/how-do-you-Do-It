@@ -76,11 +76,11 @@ package
             mom_sprite.alpha = 0;
 
             if(FlxG.music == null){
-                FlxG.playMusic(SndBGM, ggj.VOLUME);
+                //FlxG.playMusic(SndBGM, ggj.VOLUME);
             } else {
                 FlxG.music.resume();
                 if(!FlxG.music.active){
-                    FlxG.playMusic(SndBGM, ggj.VOLUME);
+                    //FlxG.playMusic(SndBGM, ggj.VOLUME);
                 }
             }
         }
