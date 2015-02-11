@@ -4,6 +4,7 @@ package{
     public class EndState extends FlxState{
         public var times:Number;
         public var caught:Boolean
+        public var startTime:Number;
 
         public function EndState(sex:Number, caught:Boolean){
             times = sex;
@@ -11,6 +12,7 @@ package{
         }
 
         override public function create():void{
+            startTime = new Date().valueOf();
             var t:FlxText;
             FlxG.mouse.hide();
             var textWidth:Number = FlxG.width;
@@ -35,6 +37,10 @@ package{
 
         override public function update():void{
             super.update();
+
+            if (new Date().valueOf() - startTime > 30*1000) {
+                FlxG.switchState(new MenuState());
+            }
 
             if(FlxG.keys.any()){
                 FlxG.switchState(new MomLeavingState(new PlayState()));
