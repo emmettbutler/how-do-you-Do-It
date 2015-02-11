@@ -3,6 +3,7 @@ package{
 
     public class MenuState extends FlxState{
         [Embed(source="../assets/title_screen.png")] private var ImgBG:Class;
+        [Embed(source = "../assets/bgm.mp3")] private var SndBGM:Class;
 
         override public function create():void{
             FlxG.mouse.hide();
@@ -15,6 +16,15 @@ package{
             t.alignment = "right";
             t.color = 0xf9d0b4;
             add(t);
+
+            if(FlxG.music == null){
+                FlxG.playMusic(SndBGM, ggj.VOLUME);
+            } else {
+                FlxG.music.resume();
+                if(!FlxG.music.active){
+                    FlxG.playMusic(SndBGM, ggj.VOLUME);
+                }
+            }
         }
 
         override public function update():void{
