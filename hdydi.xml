@@ -1,0 +1,12 @@
+<application xmlns="http://ns.adobe.com/air/application/15.0">
+    <id>com.fbkc.hdydi</id>
+    <versionNumber>1.0</versionNumber>
+    <filename>how do you Do It</filename>
+    <initialWindow>
+        <content>how-do-you-do-it.swf</content>
+        <visible>true</visible>
+        <width>640</width>
+        <height>490</height>
+    </initialWindow>
+</application>
+
