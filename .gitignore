@@ -8,3 +8,4 @@ nohup.out
 *.swf
 *.app
 *.pfx
+*.tmp
