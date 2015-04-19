@@ -37,7 +37,11 @@ Upload build to steam
     cd steamworks_sdk/tools/ContentBuilder
     builder_osx/steamcmd +login <steamusername> <password> +run_app_build_http ../scripts/mac_app_build_1000.vdf +quit
 
-Merge build in steam UI
+Merge build in steam UI:
+
+* App Admin, Builds tab
+* Select the default branch for the just-uploaded build
+* Click Preview Change and confirm the merge
 
 Windows
 -------
@@ -64,6 +68,12 @@ Upload build to steam
     cd steamworks_sdk\tools\ContentBuilder
     builder\steamcmd.exe +login <steamusername> <password> +run_app_build_http ..\scripts\windows_app_build_1000.vdf +quit
 
-Merge build in steam UI
+Merge build in steam UI:
 
-Publish changes to Steam!
+* App Admin, Builds tab
+* Select the default branch for the just-uploaded build
+* Click Preview Change and confirm the merge
+
+Publish changes to Steam
+
+* Add depots to packages at this url: https://partner.steamgames.com/apps/associated/[AppId]
